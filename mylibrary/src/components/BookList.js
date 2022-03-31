@@ -1,9 +1,7 @@
 import React from 'react'
 
-export default function BookList(){
+export default function(){
     return(
-        <div>
-            <p>hey this is book list</p>
-        </div>
+        <div>sdfg</div>
     );
 }
