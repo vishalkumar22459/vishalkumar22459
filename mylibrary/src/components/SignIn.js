@@ -6,7 +6,11 @@ import validator from 'validator';
 
  export default function SignIn(){
 
-    const [emailError, setEmailError] = useState('')
+    const [emailError, setEmailError] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [role, setRole] = useState('');
+    
   const validateEmail = (e) => {
     var email = e.target.value
   
@@ -20,6 +24,12 @@ import validator from 'validator';
     function handleSubmit(e){
         e.preventDefault();
         console.log("submit button clicked");
+        const formdata = {
+            email:email,
+            password:password,
+            role:role
+        }
+        console.log(formdata);
         
     }
      
@@ -34,7 +44,7 @@ import validator from 'validator';
 
                         <div className="form-outline mb-0">
                         <label className="form-label" htmlFor="typeEmailX-2">Email</label>
-                        <input type="email" id="typeEmailX-2" className="form-control form-control-m"  onChange={(e)=> validateEmail(e)}/>
+                        <input type="email" name="username" value={email} id="typeEmailX-2" className="form-control form-control-m"  onChange={(e)=> setEmail(e.target.value) } onKeyPress={validateEmail}/>
                             <span style={{
                             color: 'red',
                             fontSize:15
@@ -43,14 +53,15 @@ import validator from 'validator';
 
                         <div className="form-outline mb-0">
                         <label className="form-label" htmlFor="typePasswordX-2">Password</label>
-                        <input type="password" id="typePasswordX-2" className="form-control form-control-m" />
+                        <input type="password" value={password} onChange={(e)=> setPassword(e.target.value) } name="password" id="typePasswordX-2" className="form-control form-control-m" />
                         </div>
 
                         <div className="form-outline mb-3">
                         <label className="form-label" htmlFor="typePasswordX-2">Role</label>
-                        <select  className="form-control form-control-m" id="typeRoleX-2">
+                        <select name="role" value={role} onChange={(e)=> setRole(e.target.value) } className="form-control form-control-m" id="typeRoleX-2">
+                        <option>Select</option>
                         <option>Student</option>
-                        <option value="">Admin</option> </select>
+                        <option >Admin</option> </select>
                         </div>
 
                         <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleSubmit}>Login</button>
