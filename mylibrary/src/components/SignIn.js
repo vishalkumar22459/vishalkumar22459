@@ -2,6 +2,8 @@
 import { Link} from "react-router-dom";
 import React, { useState } from "react";
 import validator from 'validator';
+import axios from 'axios';
+
 
 
  export default function SignIn(){
@@ -10,6 +12,10 @@ import validator from 'validator';
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
+    
+    
+
+    
     
   const validateEmail = (e) => {
     var email = e.target.value
@@ -30,7 +36,14 @@ import validator from 'validator';
             role:role
         }
         console.log(formdata);
-        
+        axios.post('http://localhost:4000/about',formdata)
+            .then(Response =>{
+              console.log(Response)  
+            })
+            .catch(error => {
+                console.log(error)
+            })
+       
     }
      
      return(
