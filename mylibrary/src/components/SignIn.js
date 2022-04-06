@@ -11,7 +11,6 @@ import axios from 'axios';
     const [emailError, setEmailError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
     
     
 
@@ -33,9 +32,10 @@ import axios from 'axios';
         const formdata = {
             email:email,
             password:password,
-            role:role
         }
         console.log(formdata);
+        if(email !== '' && password !== '' )
+        {
         axios.post('http://localhost:4000/about',formdata)
             .then(Response =>{
               console.log(Response)  
@@ -43,6 +43,10 @@ import axios from 'axios';
             .catch(error => {
                 console.log(error)
             })
+
+        }else{
+            window.alert("PLEASE FILL ALL THE ENTRIES !")
+        }
        
     }
      
@@ -69,13 +73,7 @@ import axios from 'axios';
                         <input type="password" value={password} onChange={(e)=> setPassword(e.target.value) } name="password" id="typePasswordX-2" className="form-control form-control-m" />
                         </div>
 
-                        <div className="form-outline mb-3">
-                        <label className="form-label" htmlFor="typePasswordX-2">Role</label>
-                        <select name="role" value={role} onChange={(e)=> setRole(e.target.value) } className="form-control form-control-m" id="typeRoleX-2">
-                        <option>Select</option>
-                        <option>Student</option>
-                        <option >Admin</option> </select>
-                        </div>
+                        
 
                         <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleSubmit}>Login</button>
                         

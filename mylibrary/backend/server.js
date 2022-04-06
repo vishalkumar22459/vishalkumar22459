@@ -17,7 +17,7 @@ async function getData(){
   let db = result.db(databaseName);
   let collection = db.collection('content');
   let response = await collection.find({}).toArray();
-  console.log(response);
+  //console.log(response);
 }
 getData();
 
@@ -28,6 +28,11 @@ app.post("/about",(req,res)=> {
     console.log(req.body);
 });
 
+app.post("/register",(req,res)=> {
+  res.send("this hello from register page <br/>");
+    const name = req.body;
+    console.log(req.body);
+});
 
 
 app.listen(port, ()=>{
