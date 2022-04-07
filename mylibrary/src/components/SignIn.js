@@ -36,13 +36,15 @@ import axios from 'axios';
         console.log(formdata);
         if(email !== '' && password !== '' )
         {
-        axios.post('http://localhost:4000/about',formdata)
+        axios.post('http://localhost:4000/signin',formdata)
             .then(Response =>{
               console.log(Response)  
             })
             .catch(error => {
                 console.log(error)
             })
+            window.alert("loging success")
+            window.location.href='/Admin'
 
         }else{
             window.alert("PLEASE FILL ALL THE ENTRIES !")

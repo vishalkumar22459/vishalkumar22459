@@ -1,11 +1,10 @@
 import React from 'react'
+import TodoList from './TodoList';
 
-function Admin() {
-  return (
-    <div>
-      
-    </div>
-  )
+export default function(){
+    return(
+        <div className='todo'>
+            <TodoList/>
+        </div>
+    );
 }
-
-export default Admin
