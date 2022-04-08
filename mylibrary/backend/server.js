@@ -51,8 +51,8 @@ app.post("/register",(req,res)=> {
 
 
 
-app.post("/signin",(req,res, next)=> {
-    res.send("hello! welcome to my page <br/>");
+app.post("/signin",(req,res)=> {
+    //res.send("hello! welcome to my page <br/>");
     //console.log(req.body);
 
  
@@ -64,10 +64,14 @@ app.post("/signin",(req,res, next)=> {
       const email = req.body.email;
       const pass = req.body.password;
       const user = await collection.findOne({email , pass})
-      if(!user){
+      //console.log(user)
+      if(!user || user === ''){
         console.log("Email or Password not found in database")
+        res.json({succes : false , msg : "Email or Password not found in database"})
       }else{
-        console.log("success")
+        const role = user.role;
+        console.log("success : ");
+        res.json({role : role})
       }
 
       

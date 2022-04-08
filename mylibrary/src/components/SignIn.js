@@ -13,7 +13,8 @@ import axios from 'axios';
     const [password, setPassword] = useState('');
     
     
-
+    let role  = '';
+    let msg = '';
     
     
   const validateEmail = (e) => {
@@ -33,18 +34,31 @@ import axios from 'axios';
             email:email,
             password:password,
         }
-        console.log(formdata);
+        //console.log(formdata);
         if(email !== '' && password !== '' )
         {
         axios.post('http://localhost:4000/signin',formdata)
             .then(Response =>{
-              console.log(Response)  
+              //console.log(Response)
+                msg = Response.data.msg;
+                role = Response.data.role;
+                if(msg){
+                    console.log(msg)
+                }
+                if(role === 'Librarian'){
+                    alert("logging in.....   press ok")
+                    window.location.href='/Librarian'
+                }else if(role === 'Student'){
+
+                }else{
+
+                }
+                
             })
             .catch(error => {
                 console.log(error)
             })
-            window.alert("loging success")
-            window.location.href='/Admin'
+           
 
         }else{
             window.alert("PLEASE FILL ALL THE ENTRIES !")
