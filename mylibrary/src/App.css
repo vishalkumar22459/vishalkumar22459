@@ -257,3 +257,16 @@
     margin: -22.4% 1% 0% 51%;
     height: 45%;
 }
+
+.librarian-dashboard{
+  background-color: #0a885e;
+  border: 1px outset yellow;
+  height: 100%;
+  width: 100%;
+}
+
+.librarian-detail{
+  text-align: center;
+  border: 1px outset black;
+  background-color: lightblue;
+}

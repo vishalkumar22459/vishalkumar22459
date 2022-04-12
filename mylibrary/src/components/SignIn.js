@@ -3,6 +3,7 @@ import { Link} from "react-router-dom";
 import React, { useState } from "react";
 import validator from 'validator';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 
 
@@ -11,6 +12,8 @@ import axios from 'axios';
     const [emailError, setEmailError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const Navigate = useNavigate();
     
     
     let role  = '';
@@ -47,7 +50,12 @@ import axios from 'axios';
                 }
                 if(role === 'Librarian'){
                     alert("logging in.....   press ok")
+                    // let userid=email;
+                    Navigate('/Librarian',{state:email});
                     window.location.href='/Librarian'
+                    
+                    
+
                 }else if(role === 'Student'){
                     window.location.href='/student'
                 }else if(role === 'Admin'){
