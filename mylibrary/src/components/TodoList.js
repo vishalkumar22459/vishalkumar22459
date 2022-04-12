@@ -3,6 +3,8 @@ import TodoForm from './TodoForm'
 import Todo from './Todo'
 
 function TodoList() {
+    // e.preventDefault()
+    
     const [todos , setTodos] = useState([])
     const addTodo = todo => {
         if(!todo.text || /^\s*$/.test(todo.test)){
@@ -20,6 +22,7 @@ function TodoList() {
 
 
     const completeTodo = id => {
+        // id.preventDefault()
         let updatedTodods = todos.map(todo =>{
             if(todo.id === id){
                 todo.isComplete = !todo.isComplete;

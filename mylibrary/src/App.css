@@ -46,6 +46,10 @@
 
 }
 
+.container-fluid{
+  background-color: #b0c2e6;
+}
+
 .nav{
   margin-top: 0%;
 }
@@ -183,4 +187,73 @@
   background-color: #f0f0f0;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.stud-dashboard{
+  position: relative;
+  border: 1px outset #282c34;
+  background-color: #efe9e9;
+  margin: 0px 0px 0 0px;
+  height: auto;
+  width: 100%;
+}
+
+.stud-detail{
+    margin: 10px 10px 10px 10px;
+    background-color: blanchedalmond;
+    border: 1px outset black;
+    height: auto;
+}
+
+.detail{
+  border: 1px outset darkred;
+  align-items: right;
+  width: 45%;
+}
+/* .book-issued{
+  margin: -481px 10px 0 995px;
+  border: 1px outset blue;
+  width: 56rem;
+  height: 30rem;
+  background-color: aliceblue;
+} */
+.stud-title{
+  
+  text-align: center;
+}
+
+.admin-dashboard{
+  border: 1px outset #282c34;
+  background-color: #efe9e9;
+  margin: 0 0 0 0;
+  height: 948px;
+  
+}
+
+.admin-detail{
+    margin-top: 5%;
+    background-color: blanchedalmond;
+    border: 1px outset black;
+    width: 50%;
+    height: 350px;
+    user-select: auto;
+}
+.admin-title{
+  text-align: center;
+}
+.all-students{
+  position: relative;
+  user-select: auto;
+    border: 1px outset black;
+    margin: -25% 50% 0% 0%;
+    height: 45%;
+}
+
+.all-librarians{
+  position: relative;
+  user-select: auto;
+    user-select: auto;
+    border: 1px outset black;
+    margin: -22.4% 1% 0% 51%;
+    height: 45%;
 }

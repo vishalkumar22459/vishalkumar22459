@@ -49,9 +49,11 @@ import axios from 'axios';
                     alert("logging in.....   press ok")
                     window.location.href='/Librarian'
                 }else if(role === 'Student'){
-
+                    window.location.href='/student'
+                }else if(role === 'Admin'){
+                    window.location.href='/Admin'
                 }else{
-
+                    window.alert("wrong id/pass")
                 }
                 
             })
