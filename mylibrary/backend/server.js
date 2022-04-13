@@ -45,12 +45,6 @@ app.post("/register",(req,res)=> {
 });
 
 
-
-
-
-
-
-
 app.post("/signin",(req,res)=> {
     //res.send("hello! welcome to my page <br/>");
     //console.log(req.body);
@@ -72,13 +66,39 @@ app.post("/signin",(req,res)=> {
         const role = user.role;
         console.log("success : ");
         res.json({role : role})
-      }
-
-      
+      }      
     }
     getData();
     
 });
+
+
+app.post("/librarian",(req,res)=>{
+    async function getData(){
+      let result =await client.connect();
+      let db = result.db(databaseName);
+      let collection = db.collection('Booklist');
+      
+      const email = req.body.email;
+      const bookname = req.body.bookname;
+      const author = req.body.author;
+      console.log("data added "+email+bookname+author)   
+      
+      var obj =[
+        {
+          "email": email,
+          "bookname":bookname,
+          "author":author,
+          
+        }];
+        collection.insertMany(obj,function(err,res){
+          if(err)throw err;
+          console.log("inserted");
+          console.log(obj);
+        })
+    }
+    getData();
+})
 
 
 

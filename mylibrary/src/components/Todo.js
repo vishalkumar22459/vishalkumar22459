@@ -11,7 +11,7 @@ function Todo({todos, completeTodo, removeTodo}) {
 
     
   return todos.map((todo , index) => (
-      <div className={todo.isComplete ? 'todo-row complete':
+    <div className={todo.isComplete ? 'todo-row complete':
       'todo-row'} key={index}>
 
         <div key={todo.id} onClick={()=>completeTodo(todo.id)}>
@@ -26,7 +26,7 @@ function Todo({todos, completeTodo, removeTodo}) {
             />
             
         </div>
-      </div>
+    </div>
   ))
 }
 

@@ -1,10 +1,19 @@
 import React, {useState} from 'react'
+import { useLocation} from 'react-router-dom';
+import axios from 'axios';
+
 
 function TodoForm(props) {
-    const[input, setInput] = useState('')
+    const[book, setbook] = useState('')
+    const[author, setauthor] = useState('')
+    const location = useLocation();
+    // console.log(location.state)
 
     const handleChange = e =>{
-        setInput(e.target.value);
+        setbook(e.target.value);
+    }
+    const Change = e1 =>{
+        setauthor(e1.target.value);
     }
 
     const handleSubmit = e => {
@@ -12,20 +21,50 @@ function TodoForm(props) {
 
         props.onSubmit({
             id:Math.floor(Math.random()*10000),
-            text: input
+            text: book +" " + author
+            
         });
-        setInput('');
+        // console.log(location.state +" "+book+" "+author)
+        const bookdata = {
+            email: location.state ,
+            bookname: book,
+            author: author
+        }
+        if(book!=='' & author !==''){
+            axios.post('http://localhost:4000/librarian',bookdata)
+            .then(response =>{
+
+            })
+            .catch(error => {
+                if(error) throw error;
+            })
+        }
+        setbook('');
+        setauthor('');
     }
+    
 
   return (
     <form className='todo-form' onSubmit={handleSubmit}>
+        <div>
         <input type="text" 
         placeholder='BookName' 
-        value={input} 
+        value={book} 
         name='text'
         className='todo-input'
         onChange={handleChange}
         />
+        </div>
+        <div>
+        <input type="text" 
+        placeholder='author' 
+        value={author} 
+        name='text'
+        className='todo-input'
+        onChange={Change}
+        />
+        </div>
+        
         <button className='todo-button'>Add</button>
     </form>
   )

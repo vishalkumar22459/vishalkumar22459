@@ -7,12 +7,13 @@ function TodoList() {
     
     const [todos , setTodos] = useState([])
     const addTodo = todo => {
-        if(!todo.text || /^\s*$/.test(todo.test)){
+        if(!todo.text || /^\s*$/.test(todo.text)){
             return
         }
         const newTodos = [todo, ...todos]
         setTodos(newTodos)
         console.log(...todos);
+        console.log("hey todos"+todos)
     }
 
     const removeTodo = id => {

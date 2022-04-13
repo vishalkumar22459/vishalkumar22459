@@ -49,13 +49,10 @@ import {useNavigate} from 'react-router-dom'
                     console.log(msg)
                 }
                 if(role === 'Librarian'){
-                    alert("logging in.....   press ok")
+                    window.alert("logging in.....")
                     // let userid=email;
                     Navigate('/Librarian',{state:email});
                     window.location.href='/Librarian'
-                    
-                    
-
                 }else if(role === 'Student'){
                     window.location.href='/student'
                 }else if(role === 'Admin'){

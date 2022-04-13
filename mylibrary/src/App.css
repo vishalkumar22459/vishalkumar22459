@@ -250,8 +250,8 @@
 }
 
 .all-librarians{
-  position: relative;
-  user-select: auto;
+    position: relative;
+    user-select: auto;
     user-select: auto;
     border: 1px outset black;
     margin: -22.4% 1% 0% 51%;
@@ -260,13 +260,26 @@
 
 .librarian-dashboard{
   background-color: #0a885e;
-  border: 1px outset yellow;
-  height: 100%;
-  width: 100%;
+  border: 1px outset rgb(236, 23, 15);
+
 }
 
 .librarian-detail{
+  color: #63061d;
+  padding-top: 15px;
   text-align: center;
   border: 1px outset black;
   background-color: lightblue;
+}
+
+.lib-user-details{
+  background-color: #6070b9;
+  border: 1px outset rgb(236, 23, 15);
+  height: 520px;
+}
+.add-books{
+  background-color: #cacc3e;
+  border: 1px outset rgb(22, 22, 22);
+
+ 
 }
