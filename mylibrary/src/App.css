@@ -193,7 +193,6 @@
   position: relative;
   border: 1px outset #282c34;
   background-color: #efe9e9;
-  margin: 0px 0px 0 0px;
   height: auto;
   width: 100%;
 }
@@ -218,7 +217,7 @@
   background-color: aliceblue;
 } */
 .stud-title{
-  
+  padding-top: 15px;
   text-align: center;
 }
 
@@ -230,33 +229,7 @@
   
 }
 
-.admin-detail{
-    margin-top: 5%;
-    background-color: blanchedalmond;
-    border: 1px outset black;
-    width: 50%;
-    height: 350px;
-    user-select: auto;
-}
-.admin-title{
-  text-align: center;
-}
-.all-students{
-  position: relative;
-  user-select: auto;
-    border: 1px outset black;
-    margin: -25% 50% 0% 0%;
-    height: 45%;
-}
 
-.all-librarians{
-    position: relative;
-    user-select: auto;
-    user-select: auto;
-    border: 1px outset black;
-    margin: -22.4% 1% 0% 51%;
-    height: 45%;
-}
 
 .librarian-dashboard{
   background-color: #0a885e;
@@ -281,5 +254,25 @@
   background-color: #cacc3e;
   border: 1px outset rgb(22, 22, 22);
 
- 
+}
+
+
+.student-info{
+  border: 1px outset black;
+  background-color: #e7fcf5;
+  width: 40%;
+}
+
+
+/* Admin page*/
+.admin-detail{
+  /* margin-top: 0px; */
+  background-color: blanchedalmond;
+  border: 1px outset black;
+  width: 50%;
+}
+.admin-title{
+  border: 1px outset black;
+  text-align: center;
+  padding-top: 2px;
 }

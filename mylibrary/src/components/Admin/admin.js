@@ -1,17 +1,34 @@
 import React from 'react'
-import Navbar from '../Navbar';
+import AdminNavbar from './AdminNav';
+import { useLocation} from 'react-router-dom';
 
-export default function(){
+export default function Admin(){
+
+    const location = useLocation();
+    var Aarr= location.state
+    // console.log(/Aarr);
+    
+
     return(
         <>
-        <Navbar title={"Admin"}/>
+        <AdminNavbar/>
         <div className ="admin-dashboard" name="admin-dashboard">
             <h1 className='admin-title'>Admin Dashboard</h1>
             <div className="admin-detail" name="admin-detail" >
-                detail
-            </div>
-            <div className="book-issued" name="book-issued">
-                issued-book
+                <h3>My-Details</h3>
+                <div>
+                    <p>Name :{Aarr[0]}</p>
+                </div>
+                <div>
+                    <p>Email : {Aarr[1]}</p>
+                </div>
+                <div>
+                    <p>Contact : {Aarr[3]}</p>
+                </div>
+                <div>
+                    <p>Role : {Aarr[2]}</p>
+                </div>
+                
             </div>
             <div className="all-students" name="all-students">
                 allstudents

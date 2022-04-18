@@ -41,9 +41,6 @@ export default function Librarian(){
     }
 
     return(
-        // <div className='todo'>
-        //     <TodoList/>
-        // </div>
         <>
             <Navbar title={"Librarian"}/>
             <div className='librarian-dashboard'>
@@ -53,13 +50,13 @@ export default function Librarian(){
             </div>
 
             <div className='add-books'>
-                 <h1 className='todoh1'>Add Books to Library's Booklist</h1>
+                <h1 className='todoh1'>Add Books to Library's Booklist</h1>
                 <TodoForm onSubmit={addTodo}/>
             </div>
 
 
             <div className='lib-user-details'>
-                <h1 className='todoh1'>Newly Added Books</h1>
+                <h1 className='todoh1'>Newly Added Book </h1>
                 <Todo  todos={todos} completeTodo={completeTodo} removeTodo={removeTodo}/>
             </div>
         </>

@@ -15,8 +15,10 @@ import {useNavigate} from 'react-router-dom'
 
     const Navigate = useNavigate();
     
-    
+    let name ='';
     let role  = '';
+    let contact ='';
+    let address = '';
     let msg = '';
     
     
@@ -42,23 +44,31 @@ import {useNavigate} from 'react-router-dom'
         {
         axios.post('http://localhost:4000/signin',formdata)
             .then(Response =>{
-              //console.log(Response)
+                // console.log(Response.data)
                 msg = Response.data.msg;
                 role = Response.data.role;
+                name = Response.data.name;
+                contact = Response.data.contact;
+                address = Response.data.address
+                
+
                 if(msg){
                     console.log(msg)
                 }
+                
                 if(role === 'Librarian'){
-                    window.alert("logging in.....")
+                    // window.alert("logging in.....")
                     // let userid=email;
                     Navigate('/Librarian',{state:email});
                     window.location.href='/Librarian'
                 }else if(role === 'Student'){
+                    Navigate('/student',{state:[name,email,role,contact,address]});
                     window.location.href='/student'
                 }else if(role === 'Admin'){
+                    Navigate('/Admin',{state:[name,email,role,contact,address]});
                     window.location.href='/Admin'
                 }else{
-                    window.alert("wrong id/pass")
+                    window.alert(msg)
                 }
                 
             })

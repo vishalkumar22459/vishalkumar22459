@@ -18,14 +18,14 @@ function Todo({todos, completeTodo, removeTodo}) {
             {todo.text}
 
         </div>
-        <div className='icons'>
+        {/* <div className='icons'>
             <RiCloseCircleLine
             onClick={()=>removeTodo(todo.id)   
             }
             className='delete-icon'
             />
             
-        </div>
+        </div> */}
     </div>
   ))
 }

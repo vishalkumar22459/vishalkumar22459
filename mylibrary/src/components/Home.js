@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar';
-import Signin from './SignIn';
+import Signin from './Signin/SignIn';
 
 
 export default function homePage(){
