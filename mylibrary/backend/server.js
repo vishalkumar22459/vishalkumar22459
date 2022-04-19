@@ -89,19 +89,11 @@ app.post("/librarian",async(req,res)=>{
 })
 
 
-app.get("/test", (req,res )=>{
-  console.log("this is book list api");
-  async function getData(){
-    let result =await client.connect();
-    let db = result.db(databaseName);
-    let collection = db.collection('Booklist');
+app.get("/booklist", async(req,res )=>{
+    console.log("this is book list api");
+    var blist =await booklist.find({},{_id:0,__v:0,email:0})
+    res.json({book:blist})
     
-      
-    var blist =await collection.find({},{_id:0})
-    // res.json({book:blist.bookname ,author:blist.author })
-    console.log(blist)
-  }
-  getData();
 })
 
 

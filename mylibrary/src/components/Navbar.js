@@ -17,7 +17,7 @@ export default function Navbar(props){
                     </li>
                     
                     <li className="nav-item">
-                    <a className="nav-link active" href="#">BookList</a>
+                    <a className="nav-link active" href="/booklist">BookList</a>
                     </li>
 
                 </ul>
