@@ -244,10 +244,10 @@
 }
 
 /* Admin page*/
-.admin-detail{
-  /* margin-top: 0px; */
-  background-color: blanchedalmond;
+
+.admin-info{
   border: 1px outset black;
+  background-color: #d2e0dc;
   width: 50%;
 }
 .admin-title{
@@ -260,6 +260,11 @@
 .heading{
   text-align: center;
   padding: 10px auto;
+}
+.remove-user{
+  border: 1px outset black;
+  background-color: #d2e7f1;
+  width: 50%;
 }
 
 
@@ -285,4 +290,9 @@
   border: 1px outset black;
   background-color: #d2e7f1;
   width: 50%;
+}
+
+.x{
+  border: 1px outset black;
+  height: 20%;
 }

@@ -47,12 +47,13 @@ export default function Student(){
         }
     }  
     
+    
 
     return(
         <>
         <StudentNavbar title={"Student"}/>
         <div className ="row" name="stud-dashboard">
-            <h1 className='stud-title'>Student Dashboard</h1>
+            {/* <h1 className='stud-title'>Student Dashboard</h1> */}
             <section className='student-info'> 
                 <h3 className='heading'>My-Details</h3>  
                 <div>
@@ -89,6 +90,11 @@ export default function Student(){
                 <div>
                     {message}
                 </div>
+            </section>
+            <section className='x'>
+                <p>
+                    lkj
+                </p>
             </section>
         </div>
         

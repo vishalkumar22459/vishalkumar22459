@@ -68,7 +68,8 @@ app.post("/signin",async(req,res)=> {
     
 });
 
-const booklist = require('./schema/book')
+const booklist = require('./schema/book');
+const { response } = require("express");
 app.post("/librarian",async(req,res)=>{
       const email = req.body.email;
       const bookname = req.body.bookname;
@@ -113,7 +114,21 @@ app.post("/student" , async(req,res)=>{
   
 })
 
+app.post("/Admin",async(req,res)=>{
+  const user = req.body.email;
+  await registerschema.findOneAndDelete({email:user})
+  .then(response =>{
+    if(response == null){
+      res.json({msg:"user not found in database"})
+    }else{
+      res.json({msg:"user found and removed from database successfully"})
+    }
+  })
+  .catch(e => {
+    if(e) throw e;
+  })
 
+})
 
 
 app.listen(port, ()=>{
