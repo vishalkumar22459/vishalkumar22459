@@ -216,19 +216,6 @@
   height: 30rem;
   background-color: aliceblue;
 } */
-.stud-title{
-  padding-top: 15px;
-  text-align: center;
-}
-
-.admin-dashboard{
-  border: 1px outset #282c34;
-  background-color: #efe9e9;
-  margin: 0 0 0 0;
-  height: 948px;
-  
-}
-
 
 
 .librarian-dashboard{
@@ -256,14 +243,6 @@
 
 }
 
-
-.student-info{
-  border: 1px outset black;
-  background-color: #e7fcf5;
-  width: 40%;
-}
-
-
 /* Admin page*/
 .admin-detail{
   /* margin-top: 0px; */
@@ -275,4 +254,35 @@
   border: 1px outset black;
   text-align: center;
   padding-top: 2px;
+}
+
+
+.heading{
+  text-align: center;
+  padding: 10px auto;
+}
+
+
+
+/* student page */
+.stud-title{
+  padding-top: 15px;
+  text-align: center;
+}
+
+#stud-dashboard{
+  background-color: #518a77;
+}
+
+.student-info{
+  border: 1px outset black;
+  background-color: #e7fcf5;
+  width: 50%;
+}
+
+
+.borrow-book{
+  border: 1px outset black;
+  background-color: #d2e7f1;
+  width: 50%;
 }

@@ -97,7 +97,21 @@ app.get("/booklist", async(req,res )=>{
 })
 
 
-
+app.post("/student" , async(req,res)=>{
+  const bookname = req.body.bookname;
+  const author = req.body.author;
+  const data = await booklist.findOneAndDelete({bookname,author},{_id:0 ,__v:0})
+  if(data){
+    
+    const msg= "You have successfully borrowed a book"
+    res.json({msg:msg , bookname:bookname , author:author})
+  }else{
+    const msg= "Book not found in booklist! borrow some other book"
+    res.json({msg:msg , bookname:'' , author: ''})
+    // console.log("false")
+  }
+  
+})
 
 
 

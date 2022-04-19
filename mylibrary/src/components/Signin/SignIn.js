@@ -60,13 +60,13 @@ import {useNavigate} from 'react-router-dom'
                     // window.alert("logging in.....")
                     // let userid=email;
                     Navigate('/Librarian',{state:email});
-                    window.location.href='/Librarian'
+                    // window.location.href='/Librarian'
                 }else if(role === 'Student'){
                     Navigate('/student',{state:[name,email,role,contact,address]});
-                    window.location.href='/student'
+                    // window.location.href='/student'
                 }else if(role === 'Admin'){
                     Navigate('/Admin',{state:[name,email,role,contact,address]});
-                    window.location.href='/Admin'
+                    // window.location.href='/Admin'
                 }else{
                     window.alert(msg)
                 }

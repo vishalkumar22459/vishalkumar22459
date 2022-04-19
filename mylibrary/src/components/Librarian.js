@@ -6,6 +6,7 @@ import { useLocation} from 'react-router-dom';
 import React ,{useState}from 'react'
 import TodoForm from './TodoForm'
 import Todo from './Todo'
+import LibNavbar from './Librarian/libNavbar';
 
 export default function Librarian(){
 
@@ -42,7 +43,7 @@ export default function Librarian(){
 
     return(
         <>
-            <Navbar title={"Librarian"}/>
+            <LibNavbar/>
             <div className='librarian-dashboard'>
                 <div className='librarian-detail'>
                     <p>Now user "{location.state}" is logged in</p>
