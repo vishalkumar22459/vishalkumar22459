@@ -44,22 +44,28 @@ export default function Librarian(){
     return(
         <>
             <LibNavbar/>
-            <div className='librarian-dashboard'>
-                <div className='librarian-detail'>
-                    <p>Now user "{location.state}" is logged in</p>
+            <div className='row'>
+                <div className='librarian-dashboard'>
+                    <div className='librarian-detail'>
+                        <p>Now user "{location.state}" is logged in</p>
+                    </div>
+                </div>
+
+                <div className='add-books'>
+                    <h3 className='todoh1'>Add Books to Library's Booklist</h3>
+                    <TodoForm onSubmit={addTodo}/>
+                </div>
+                
+                <div className='lib-remove-book'>
+                    <h3 className='heading'>Remove book</h3>
                 </div>
             </div>
 
-            <div className='add-books'>
-                <h1 className='todoh1'>Add Books to Library's Booklist</h1>
-                <TodoForm onSubmit={addTodo}/>
-            </div>
-
-
-            <div className='lib-user-details'>
-                <h1 className='todoh1'>Newly Added Book </h1>
+            <div className='lib-new-book'>
+                <h3 className='heading'>Newly Added Book </h3>
                 <Todo  todos={todos} completeTodo={completeTodo} removeTodo={removeTodo}/>
             </div>
+            
         </>
     );
 }

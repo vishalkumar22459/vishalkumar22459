@@ -17,7 +17,7 @@ export default function AdminNavbar(){
                     </li>
                 </ul>
 
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">    
+                {/* <ul className="navbar-nav me-auto mb-2 mb-lg-0">    
                     <li className="nav-item">
                     <a className="nav-link active" href="#">Students</a>
                     </li>
@@ -27,7 +27,7 @@ export default function AdminNavbar(){
                     <li className="nav-item">
                     <a className="nav-link active" href="#">Librarians</a>
                     </li>
-                </ul>
+                </ul> */}
 
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">    
                     <li className="nav-item">

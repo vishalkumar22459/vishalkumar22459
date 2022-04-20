@@ -58,7 +58,7 @@ export default function Register(props){
     
     return(
         <>
-        <Navbar title={"MyLibrary"}/> 
+        {/* <Navbar title={"MyLibrary"}/>  */}
         <div className="my-form">
             <div className="cotainer">
                 <div className="row justify-content-center">

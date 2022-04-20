@@ -76,10 +76,10 @@
 .todo-input {
   padding: 14px 32px 14px 16px;
   border-radius: 4px 0 0 4px;
-  border: 2px solid #5d0cff;
+  border: 1px solid #5d0cff;
   outline: none;
   width: 320px;
-  background: transparent;
+  background:cross-fade();
   color: black;
   
 }
@@ -232,44 +232,79 @@
   background-color: lightblue;
 }
 
-.lib-user-details{
-  background-color: #6070b9;
-  border: 1px outset rgb(236, 23, 15);
-  height: 520px;
+.lib-new-book{
+  background-color: #d7dbf0;
+  border: outset;
+  height: 410px;
+}
+.lib-remove-book{
+  background-color: #d7dbf0;
+  border:outset ;
+  width: 50%;
+  height: 400px;
 }
 .add-books{
-  background-color: #cacc3e;
-  border: 1px outset rgb(22, 22, 22);
+  background-color: #e8e9c2;
+  border: outset;
+  width: 50%;
+  height: 400px;
 
 }
 
 /* Admin page*/
 
 .admin-info{
-  border: 1px outset black;
+  border: outset;
   background-color: #d2e0dc;
   width: 50%;
+  height: 400px;
 }
 .admin-title{
-  border: 1px outset black;
+  /* border: outset; */
   text-align: center;
   padding-top: 2px;
 }
-
+.my-details{
+  border: outset;
+  margin: 40px 150px 0 150px;
+  text-align: center;
+  padding-top: 35px;
+  height: 250px;
+}
 
 .heading{
   text-align: center;
   padding: 10px auto;
 }
 .remove-user{
-  border: 1px outset black;
+  border: outset;
   background-color: #d2e7f1;
+  text-align: center;
   width: 50%;
+}
+[name="admin-dashboard"]{
+  height: 25vh;
+  background-color: #e5f2f3;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 
+.admin-add-user{
+  border:outset;
+  background-color: #d2e0dc;
+  width: 50%;
+  height: 666px;
+}
+
 
 /* student page */
+[name="stud-dashboard"]{
+  height: 101vh;
+  background-color: #e5f2f3;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .stud-title{
   padding-top: 15px;
   text-align: center;
@@ -280,19 +315,49 @@
 }
 
 .student-info{
-  border: 1px outset black;
+  border:outset;
   background-color: #e7fcf5;
   width: 50%;
+  height: 350px;
 }
 
 
 .borrow-book{
-  border: 1px outset black;
+  border: outset;
   background-color: #d2e7f1;
   width: 50%;
+  height: 350px;
 }
 
 .x{
   border: 1px outset black;
   height: 20%;
+}
+
+.my-details-student{
+  border: outset;
+  margin: 10px 150px 0 150px;
+  text-align: center;
+  padding-top: 35px;
+  height: 250px;
+}
+
+.stud-form{
+  /* border:1px inset;
+  margin: 10px 10px 10px 180px; */
+  padding: 10px 10px 10px 200px;
+}
+
+
+/* booklist */
+.book-list{
+  background-color: hsl(91, 53%, 88%);
+  /* background-image:url("../public/images/lib3.jpg"); */
+  height: 101vh;
+  /* margin-top: 0px; */
+  font-size: 30px;
+  color: #000000;
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }

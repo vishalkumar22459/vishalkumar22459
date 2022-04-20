@@ -28,7 +28,7 @@ export default function Booklist(){
 
     return(
         <>
-            <div>
+        <div className='book-list'>
             <h1 className='heading'> Available Books </h1>
             <ReactBootsrap.Table striped bordered hover>
             <thead>

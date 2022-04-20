@@ -51,21 +51,23 @@ function TodoForm(props) {
         placeholder='BookName' 
         value={book} 
         name='text'
-        className='todo-input'
+        className='form-control-lg'
         onChange={handleChange}
         />
         </div>
+        
         <div>
         <input type="text" 
         placeholder='author' 
         value={author} 
         name='text'
-        className='todo-input'
+        className='form-control-lg'
         onChange={Change}
         />
         </div>
-        
-        <button className='todo-button'>Add</button>
+        <div>
+            <button className='btn-lg btn-outline-success'>Add</button>
+        </div>
     </form>
   )
 }

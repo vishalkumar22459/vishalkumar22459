@@ -1,8 +1,9 @@
 import React from 'react'
 import AdminNavbar from './AdminNav';
-import { useLocation} from 'react-router-dom';
+import { useLocation , Link} from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+// import Register from '../Register'
 
 export default function Admin(){
 
@@ -37,35 +38,51 @@ export default function Admin(){
         <div className ="row" name="admin-dashboard">
             {/* <h1 className='admin-title'>Admin Dashboard</h1> */}
             <section className='admin-info'>
-                
-                    <h3 className="heading">MyDetails</h3>
-                    <div>
-                        <p>Name :{Aarr[0]}</p>
+            <h3 className="heading">MyDetails</h3>
+                    <div className='my-details'>
+                        <div>
+                            <p>Name :{Aarr[0]}</p>
+                        </div>
+                        <div>
+                            <p>Email : {Aarr[1]}</p>
+                        </div>
+                        <div>
+                            <p>Contact : {Aarr[3]}</p>
+                        </div>
+                        <div>
+                            <p>Role : {Aarr[2]}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p>Email : {Aarr[1]}</p>
-                    </div>
-                    <div>
-                        <p>Contact : {Aarr[3]}</p>
-                    </div>
-                    <div>
-                        <p>Role : {Aarr[2]}</p>
-                    </div>
-                
             </section>
             <section className="remove-user">
                 <h3 className='heading'>Remove User</h3>
                 <div >
-                      <label htmlFor="email">Email</label>
-                      <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} />
+                      <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
+                      <div>
+                        <input type="text"   value={email} onChange={(e)=>setEmail(e.target.value)} />
+                      </div>
                 </div>
                 <div>
-                    <button onClick={handleRemoveUser}>
+                    <button onClick={handleRemoveUser} className='btn btn-outline-primary'>
                         Remove User
                     </button>
                 </div>
                 <div>
                     {msg}
+                </div>
+            </section>
+            <section className='admin-add-user'>
+                <div>
+                    <h3 className='heading'>Add User here</h3>
+                    <div className='heading'>
+                        <Link to="/register">Click me to register</Link>
+                        {/* <Register/> */}
+                    </div>
+                </div>
+            </section>
+            <section className='admin-add-user'>
+                <div>
+
                 </div>
             </section>
             

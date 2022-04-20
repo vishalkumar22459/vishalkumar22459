@@ -131,6 +131,13 @@ app.post("/Admin",async(req,res)=>{
 })
 
 
+app.post("/changename",(req,res)=>{
+    const name = req.body.name;
+    console.log(name)
+
+})
+
+
 app.listen(port, ()=>{
     console.log(`listening to port no ${port}`);
 });
