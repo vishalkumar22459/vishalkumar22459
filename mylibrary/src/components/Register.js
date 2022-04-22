@@ -59,85 +59,81 @@ export default function Register(props){
     return(
         <>
         {/* <Navbar title={"MyLibrary"}/>  */}
-        <div className="my-form">
-            <div className="cotainer">
-                <div className="row justify-content-center">
-                    <div className="col-md-5">
-                        <div className="card">
-                            <div className="card-header">Register
-                            </div>
-                                <div className="card-body">
-                                <form name="my-form" >
-                                        <div className="form-group row">
-                                            <label htmlFor="full_name"  className="col-md-4 col-form-label text-md-right">Full Name</label>
-                                            <div className="col-md-6">
-                                                <input type="text" placeholder='' id="full_name" value={name} onChange={(e)=>setName(e.target.value)} className="form-control" name="full-name"/>
-                                            </div>
-                                        </div>
-        
-                                        <div className="form-group row">
-                                            <label htmlFor="email_address"  className="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-                                            <div className="col-md-6">
-                                                <input type="text" id="email_address" placeholder='demo@gmail.com' value={email} onChange={(e)=>setEmail(e.target.value)} onKeyPress={validateEmail} className="form-control" name="email-address"/>
-                                                <span style={{
-                                                color: 'red',
-                                                fontSize:15
-                                                }}>{emailError}</span>
-                                            </div>
-                                        </div>
-        
-                                        <div className="form-group row">
-                                            <label htmlFor="role" className="col-md-4 col-form-label text-md-right">Role</label>
-                                            <div className="col-md-6">
-                                            <select name="role" value={role} onChange={(e)=> setRole(e.target.value) } className="form-control form-control-m" id="typeRoleX-2">
-                                                <option>Select</option>
-                                                <option >Admin</option>
-                                                <option>Student</option>
-                                                <option >Librarian</option> </select>
-                                            </div>
-                                        </div>
-        
-                                        <div className="form-group row">
-                                            <label htmlFor="phone_number" className="col-md-4 col-form-label text-md-right">Phone Number</label>
-                                            <div className="col-md-6">
-                                                <input type="text" id="phone_number"  value={contact} onChange={(e)=>setContact(e.target.value)} className="form-control"/>
-                                            </div>
-                                        </div>
-        
-                                        <div className="form-group row">
-                                            <label htmlFor="present_address" className="col-md-4 col-form-label text-md-right">Address</label>
-                                            <div className="col-md-6">
-                                                <input type="text" id="present_address" value={address} onChange={(e)=>setAddress(e.target.value)} className="form-control"/>
-                                            </div>
-                                        </div>
-        
-                                        <div className="form-group row">
-                                            <label htmlFor="permanent_address" className="col-md-4 col-form-label text-md-right">Password</label>
-                                            <div className="col-md-6">
-                                                <input type="password" id="password" placeholder='**********' value={pass1} onChange={(e)=>setPass1(e.target.value)} className="form-control" name="password"/>
-                                            </div>
-                                        </div>
-
-                                        <div className="form-group row">
-                                            <label htmlFor="permanent_address" className="col-md-4 col-form-label text-md-right">Confirm Password</label>
-                                            <div className="col-md-6">
-                                                <input type="password" id="confirm_password" placeholder='**********' value={pass2} onChange={(e)=>setPass2(e.target.value)} className="form-control" name="confirm-password"/>
-                                            </div>
-                                        </div>
-        
-                                        
-                                            <br></br>
-                                            <div className="col-md-4 offset-md-5">
-                                                <button type="submit" onClick={handleSubmit} className="btn btn-primary">
-                                                Register
-                                                </button>
-                                            </div>
-                                    </form>
+        <div className='reg-form'>
+        <div className="col-md-6">
+            <div className="card" style={{}}>
+                <h3 className="heading">SIGN UP
+                </h3>
+                    <div className="card-body">
+                    <form name="my-form" >
+                            <div className="form-group row">
+                                <label htmlFor="full_name"  className="col-md-4 col-form-label text-md-right">Full Name</label>
+                                <div className="col-md-6">
+                                    <input type="text" placeholder='' id="full_name" value={name} onChange={(e)=>setName(e.target.value)} className="form-control" name="full-name"/>
                                 </div>
-                        </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label htmlFor="email_address"  className="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                <div className="col-md-6">
+                                    <input type="text" id="email_address" placeholder='demo@gmail.com' value={email} onChange={(e)=>setEmail(e.target.value)} onKeyPress={validateEmail} className="form-control" name="email-address"/>
+                                    <span style={{
+                                    color: 'red',
+                                    fontSize:15
+                                    }}>{emailError}</span>
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label htmlFor="role" className="col-md-4 col-form-label text-md-right">Role</label>
+                                <div className="col-md-6">
+                                <select name="role" value={role} onChange={(e)=> setRole(e.target.value) } className="form-control form-control-m" id="typeRoleX-2">
+                                    <option>Select</option>
+                                    <option >Admin</option>
+                                    <option>Student</option>
+                                    <option >Librarian</option> </select>
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label htmlFor="phone_number" className="col-md-4 col-form-label text-md-right">Phone Number</label>
+                                <div className="col-md-6">
+                                    <input type="text" id="phone_number"  value={contact} onChange={(e)=>setContact(e.target.value)} className="form-control"/>
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label htmlFor="present_address" className="col-md-4 col-form-label text-md-right">Address</label>
+                                <div className="col-md-6">
+                                    <input type="text" id="present_address" value={address} onChange={(e)=>setAddress(e.target.value)} className="form-control"/>
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label htmlFor="permanent_address" className="col-md-4 col-form-label text-md-right">Password</label>
+                                <div className="col-md-6">
+                                    <input type="password" id="password" placeholder='**********' value={pass1} onChange={(e)=>setPass1(e.target.value)} className="form-control" name="password"/>
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label htmlFor="permanent_address" className="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                <div className="col-md-6">
+                                    <input type="password" id="confirm_password" placeholder='**********' value={pass2} onChange={(e)=>setPass2(e.target.value)} className="form-control" name="confirm-password"/>
+                                </div>
+                            </div>
+
+                            
+                                <br></br>
+                                <div className="col-md-3 offset-md-4">
+                                    <button type="submit" onClick={handleSubmit} className="btn btn-primary">
+                                    Register
+                                    </button>
+                                </div>
+                        </form>
                     </div>
-                </div>
-            </div> 
+            </div>
+        </div>
         </div>
         </>  
     );

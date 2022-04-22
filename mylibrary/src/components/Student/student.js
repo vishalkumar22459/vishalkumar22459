@@ -134,7 +134,7 @@ export default function Student(){
             {/* <section className='x'>
                 <p>
                    
-                </p>
+                </p>me-right
             </section> */}
         </div>
         

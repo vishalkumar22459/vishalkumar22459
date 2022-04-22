@@ -265,14 +265,20 @@
   padding-top: 2px;
 }
 .my-details{
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
   border: outset;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin: 40px 150px 0 150px;
   text-align: center;
   padding-top: 35px;
   height: 250px;
+  overflow:hidden;
 }
 
 .heading{
+  margin-top:10px ;
   text-align: center;
   padding: 10px auto;
 }
@@ -283,6 +289,7 @@
   width: 50%;
 }
 [name="admin-dashboard"]{
+  margin-top:-40px;
   height: 25vh;
   background-color: #e5f2f3;
   background-size: cover;
@@ -296,6 +303,14 @@
   width: 50%;
   height: 666px;
 }
+
+.msg{
+  /* border:  outset; */
+  color: red;
+  margin-left: 110px;
+  width: 50%;
+}
+
 
 
 /* student page */
@@ -335,6 +350,8 @@
 }
 
 .my-details-student{
+  display:block;
+  white-space: pre-wrap;
   border: outset;
   margin: 10px 150px 0 150px;
   text-align: center;
@@ -360,4 +377,15 @@
   background-size: cover;
   background-repeat: no-repeat;
 
+}
+
+
+
+/* register */
+.reg-form{
+  text-align: right;
+  width: 150%;
+  margin-left: 15%;
+  margin-top: 10%;
+  /* padding:  50px 50px 10px 50px; */
 }

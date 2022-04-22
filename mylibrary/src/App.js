@@ -9,7 +9,10 @@ import Librarian from './components/Librarian';
 import Admin from './components/Admin/admin';
 import StudentNavbar from './components/Student/StudentNavbar'
 import LibNavbar from './components/Librarian/libNavbar';
-// import Test from './components/test/test'
+import Test from './components/test/test'
+import LibrarianDashboard from './components/Librarian/LibrarianDashboard';
+import StudentDashboard from './components/Student/StudentDashboard';
+import AdminDashboard from './components/Admin/AdminDashboard';
 
 
 
@@ -24,7 +27,10 @@ function App() {
       <Route exact path='/student' element={<Student/>} />
       <Route exact path='/Admin' element={<Admin/>} />
       <Route exact path='/booklist' element={<BookList/>} />
-      {/* <Route exact path='/test' element={<Test/>} /> */}
+      <Route exact path='/admindashboard' element={<AdminDashboard/>} />
+      <Route exact path='/librariandashboard' element={<LibrarianDashboard/>} />
+      <Route exact path='/studentdashboard' element={<StudentDashboard/>} />
+      <Route exact path='/test' element={<Test/>} />
       <Route exact path='/studentnavbar' element={<StudentNavbar title={"Student"}/>} />
       <Route exact path='/lib' element={<LibNavbar/>} />
     </Routes>

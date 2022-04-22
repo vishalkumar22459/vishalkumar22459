@@ -17,7 +17,7 @@ export default function StudentNavbar(props){
                     </li>
                 </ul>
 
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">    
+                <ul className="navbar-nav me-right mb-2 mb-lg-0">    
                     <li className="nav-item">
                     <a className="nav-link active" href="/">Logout</a>
                     </li>
