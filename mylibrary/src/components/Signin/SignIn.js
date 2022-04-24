@@ -110,7 +110,7 @@ import {useNavigate} from 'react-router-dom'
 
                         <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleSubmit}>Login</button>
                         
-                        <Link to ='/register'>
+                        <Link to ='/signup'>
                             <button className="btn btn-secondary btn-lg btn-block" >Register</button>
                         </Link>
                         <hr className="my-4"/>

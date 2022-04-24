@@ -1,5 +1,5 @@
 
-import "../../Css/test.css"
+import "../../Css/Dashboard.css"
 import React,{useState} from 'react'
 // import Books from '../BookList/BookList'
 
@@ -28,7 +28,7 @@ export default function AdminDashboard(){
                             <a href="#home"  >Home</a>
                         </li>
                         <li>
-                            <a href="#about">About</a>
+                            <a href="/signup">Register</a>
                         </li>
                 
                         <li>

@@ -38,6 +38,24 @@ app.post("/register",(req,res)=> {
       })
 });
 
+const Signup = require('../backend/schema/signup')
+app.post('/signup', (req,res)=>{
+    // const name = req.body;
+      var obj =[
+          {
+            "name": req.body.name,
+            "email": req.body.email,
+            "contact": req.body.contact,
+            "password": req.body.password,
+            "role": req.body.role
+            
+          }];
+      Signup.insertMany(obj,function(err,res){
+      if(err)throw err;
+      console.log("signed-up");
+      })
+  
+})
 
 app.post("/signin",async(req,res)=> {
     //res.send("hello! welcome to my page <br/>");
