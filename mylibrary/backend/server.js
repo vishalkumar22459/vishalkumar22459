@@ -18,26 +18,6 @@ mongoose.connect("mongodb://localhost:27017/testo7",{useNewUrlParser:true})
 .catch((err) => console.log(err));
 
 
-const registerschema = require('../backend/schema/register')
-app.post("/register",(req,res)=> {
-  res.send("this hello from register page <br/>");
-    const name = req.body;
-      var obj =[
-          {
-            "name": req.body.name,
-            "email": req.body.email,
-            "role": req.body.role,
-            "contact": req.body.contact,
-            "address": req.body.address,
-            "pass": req.body.pass
-          }];
-      registerschema.insertMany(obj,function(err,res){
-        if(err)throw err;
-        console.log("inserted");
-        console.log(obj);
-      })
-});
-
 const Signup = require('../backend/schema/signup')
 app.post('/signup', (req,res)=>{
     // const name = req.body;
@@ -58,17 +38,10 @@ app.post('/signup', (req,res)=>{
 })
 
 app.post("/signin",async(req,res)=> {
-    //res.send("hello! welcome to my page <br/>");
-    //console.log(req.body);
-    // async function getData(){
-    //   let result =await client.connect();
-    //   let db = result.db(databaseName);
-    //   let collection = db.collection('Details');
-      
       const email = req.body.email;
       const pass = req.body.password;
-      const user = await registerschema.findOne({email , pass})
-      // console.log(user)
+      const user = await Signup.findOne({email , pass})
+
       if(!user || user === ''){
         console.log("Email or Password not found in database")
         res.json({succes : false , msg : "Email or Password not found in database"})
@@ -81,8 +54,6 @@ app.post("/signin",async(req,res)=> {
         res.json({name:name , role : role, contact:contact , address:address })
         
       }      
-    // }
-    // getData();
     
 });
 
