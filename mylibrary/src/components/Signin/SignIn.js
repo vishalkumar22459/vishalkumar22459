@@ -57,15 +57,12 @@ import {useNavigate} from 'react-router-dom'
                 }
                 
                 if(role === 'Librarian'){
-                    // window.alert("logging in.....")
-                    // let userid=email;
                     Navigate('/librariandashboard',{state:email});
-                    // window.location.href='/Librarian'
                 }else if(role === 'Student'){
-                    Navigate('/student',{state:[name,email,role,contact,address]});
-                    // window.location.href='/student'
+                    Navigate('/studentdashboard',{state:email});
                 }else if(role === 'Admin'){
-                    Navigate('/Admin',{state:[name,email,role,contact,address]});
+                    Navigate('/admindashboard',{state:email});
+                    // Navigate('/Admin',{state:[name,email,role,contact,address]});
                     // window.location.href='/Admin'
                 }else{
                     window.alert(msg)

@@ -8,7 +8,6 @@ import axios from "axios";
 // import * as ReactBootsrap from 'react-bootstrap'
 
 export default function LibrarianDashboard(){
-    const Navigate = useNavigate();
     const [isActive, setActive] = useState("false");
     const location = useLocation();const [show, setShow] = React.useState(false);
     const [show1, setShow1] = React.useState(false);
@@ -133,7 +132,7 @@ export default function LibrarianDashboard(){
                                 <i className="fas fa-align-left"></i>
                                 <span>Toggle Sidebar</span>
                             </button>
-                            <button className="btn btn-dark d-inline-block d-lg-none ml-auto"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <button className="btn btn-dark "  type="button" >
                                 <i className="fas fa-align-justify"></i>
                                 <a href="/" >LogOut</a>
                             </button>
@@ -141,7 +140,7 @@ export default function LibrarianDashboard(){
                         </div>
                     </nav>
 
-                    {/* <h2>Collapsible Sidebar Using Bootstrap</h2> */}
+                    {/* Showing details of user */}
                     <div className="personal-detail">
                         <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
                             <i className="fas fa-align-justify"></i>
