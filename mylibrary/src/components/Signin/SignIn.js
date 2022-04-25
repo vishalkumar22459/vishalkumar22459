@@ -49,7 +49,7 @@ import {useNavigate} from 'react-router-dom'
                 role = Response.data.role;
                 name = Response.data.name;
                 contact = Response.data.contact;
-                address = Response.data.address
+                // password = Response.data.password;
                 
 
                 if(msg){
@@ -59,7 +59,7 @@ import {useNavigate} from 'react-router-dom'
                 if(role === 'Librarian'){
                     // window.alert("logging in.....")
                     // let userid=email;
-                    Navigate('/Librarian',{state:email});
+                    Navigate('/librariandashboard',{state:email});
                     // window.location.href='/Librarian'
                 }else if(role === 'Student'){
                     Navigate('/student',{state:[name,email,role,contact,address]});

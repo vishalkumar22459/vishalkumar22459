@@ -49,9 +49,9 @@ app.post("/signin",async(req,res)=> {
         const name = user.name;
         const role = user.role;
         const contact = user.contact;
-        const address = user.address;
+        const password = user.address;
         console.log("user "+email+" successfully logged-in as "+role);
-        res.json({name:name , role : role, contact:contact , address:address })
+        res.json({name:name , role : role, contact:contact , password:password })
         
       }      
     
@@ -119,13 +119,28 @@ app.post("/Admin",async(req,res)=>{
 
 })
 
-
-app.post("/changename",(req,res)=>{
-    const name = req.body.name;
-    console.log(name)
-
+app.post('/getdata',async(req,res)=>{
+  var email = req.body.email
+  let user = await Signup.findOne({email})
+  res.json({name:user.name ,email:user.email,contact:user.contact, role : user.role  })
+  console.log(user.name)
 })
 
+app.post('/updatename',async(req,res)=>{
+  var email = req.body.email
+  if(req.body.name !==''){
+    await Signup.findOneAndUpdate({email:email},{name:req.body.name})
+  }
+  
+  console.log(email)
+})
+app.post('/updatecontact',async(req,res)=>{
+  var email = req.body.email
+  if(req.body.contact !==''){
+    await Signup.findOneAndUpdate({email:email},{contact:req.body.contact})
+  }
+  console.log(email)
+})
 
 app.listen(port, ()=>{
     console.log(`listening to port no ${port}`);

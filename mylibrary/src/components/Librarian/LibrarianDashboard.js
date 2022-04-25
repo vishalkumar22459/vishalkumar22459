@@ -1,13 +1,94 @@
 import "../../Css/Dashboard.css"
 import React,{useState} from 'react'
+import { useLocation } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+// import * as ReactBootsrap from 'react-bootstrap'
 
 export default function LibrarianDashboard(){
+    const Navigate = useNavigate();
     const [isActive, setActive] = useState("false");
+    const location = useLocation();const [show, setShow] = React.useState(false);
+    const [show1, setShow1] = React.useState(false);
+    const [show2, setShow2] = React.useState(false);
+    const [name , setName] = useState(''); const [editname , setEditname] =useState('');
+    const [email , setEmail] = useState('');const [editemail, setEditemail]=useState('');
+    const [contact ,setContact] = useState('');const [editcontact, setEditcontact]=useState('');
+    const [role , setRole] = useState('')
 
+    var arr= location.state
+    // setName(location.state[0])
+    // window.alert(location.state)
+    useEffect(()=>{
+        const obj={
+            email:location.state
+        }
+        axios.post('http://localhost:4000/getdata',obj)
+        .then(response =>{
+                setName(response.data.name)
+                setEmail(response.data.email)
+                setContact(response.data.contact)
+                setRole(response.data.role)
+        })
+        .catch(e=>{
+            if(e)throw e;
+        })
+    })
+        
+
+
+    function hideme(){
+        var x = document.getElementById("user-info");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+
+    }
+    
+    function changeName(){
+        setShow('true')   
+    }
+    function updateName(){
+        const obj ={
+            email : email
+        }
+        obj.name=editname
+        console.log(editname)
+        
+        axios.post('http://localhost:4000/updatename',obj)
+        .then(Response => {
+            // alert(Response)
+        })
+        .catch(e => {
+            if(e) throw e;
+        })
+        window.location.href='/librariandashboard';
+    }
+    function changeContact(){
+        setShow1('true')   
+    }
+    function updateContact(){
+        const obj ={
+            email : email
+        }
+        obj.contact=editcontact        
+        axios.post('http://localhost:4000/updatecontact',obj)
+        .then(Response => {
+            alert(Response)
+        })
+        .catch(e => {
+            if(e) throw e;
+        })
+        window.location.href='/librariandashboard';
+    }
 
     function handleToggle(){
         setActive(!isActive);
-        console.log("clicked "+isActive)
+        // console.log("clicked "+isActive)
     }
     return(
         <>
@@ -52,11 +133,57 @@ export default function LibrarianDashboard(){
                                 <i className="fas fa-align-left"></i>
                                 <span>Toggle Sidebar</span>
                             </button>
+                            <button className="btn btn-dark d-inline-block d-lg-none ml-auto"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <i className="fas fa-align-justify"></i>
+                                <a href="/" >LogOut</a>
+                            </button>
                 
                         </div>
                     </nav>
 
-                    <h2>Collapsible Sidebar Using Bootstrap</h2>
+                    {/* <h2>Collapsible Sidebar Using Bootstrap</h2> */}
+                    <div className="personal-detail">
+                        <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
+                            <i className="fas fa-align-justify"></i>
+                            <a  >Hide-Show My Details</a>
+                        </button>
+                        
+                        <div className='user-info' id="user-info">
+                            <h3 className="heading">MyDetails</h3>
+                            <div className='user-details'>
+                                <div>
+                                    <p className="text-dark">Name : {name} <FaEdit onClick={changeName} /></p>
+                                    {show ? 
+                                    <div>
+                                        <input type="text" value={editname} onChange={e=> setEditname(e.target.value)}  />
+                                        <button onClick={updateName}>Update</button>
+                                    </div>
+                                    : null}
+                                </div>
+                                <div>
+                                    <p className="text-dark">Email : {email} </p>
+                                    
+                                </div>
+                                <div>
+                                    <p className="text-dark">Contact : {contact} <FaEdit onClick={changeContact} /> </p>
+                                    {show1 ? 
+                                    <div>
+                                        <input type="text" value={editcontact} onChange={e=> setEditcontact(e.target.value)}  />
+                                        <button onClick={updateContact}>Update</button>
+                                    </div>
+                                    : null}
+                                </div>
+                                <div>
+                                    <p className="text-dark">Role : {role}  </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <br /> <br />
+                        <div>fdsfsdfcdsdcdds</div>
+                        
+
+                    </div>
 
 
 

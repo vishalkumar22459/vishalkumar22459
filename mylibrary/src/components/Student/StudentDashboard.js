@@ -1,9 +1,10 @@
 import "../../Css/Dashboard.css"
 import React,{useState} from 'react'
+import { useNavigate } from "react-router-dom";
 
 export default function StudentDashboard(){
     const [isActive, setActive] = useState("false");
-
+    const Navigate = useNavigate();
 
     function handleToggle(){
         setActive(!isActive);
@@ -51,6 +52,10 @@ export default function StudentDashboard(){
                             <button type="button" id="sidebarCollapse" className="btn btn-info" onClick={handleToggle}>
                                 <i className="fas fa-align-left"></i>
                                 <span>Toggle Sidebar</span>
+                            </button>
+                            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="fas fa-align-justify"></i>
+                                <a onClick={Navigate('/')} >LogOut</a>
                             </button>
                 
                         </div>
