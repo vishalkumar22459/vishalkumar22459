@@ -121,9 +121,9 @@ app.post("/Admin",async(req,res)=>{
 
 app.post('/getdata',async(req,res)=>{
   var email = req.body.email
-  let user = await Signup.findOne({email})
-  res.json({name:user.name ,email:user.email,contact:user.contact, role : user.role  })
-  console.log(user.name)
+  let user =await Signup.findOne({email})
+  res.json({name:user.name,email:user.email,contact:user.contact, role : user.role  })
+  // console.log(user.name)
 })
 
 app.post('/updatename',async(req,res)=>{
@@ -139,7 +139,7 @@ app.post('/updatecontact',async(req,res)=>{
   if(req.body.contact !==''){
     await Signup.findOneAndUpdate({email:email},{contact:req.body.contact})
   }
-  console.log(email)
+  // console.log(email)
 })
 
 app.listen(port, ()=>{

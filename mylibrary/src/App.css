@@ -399,10 +399,28 @@
   background-color:white;
   width: 100%;
   display: block;
-  /* height: 400px; */
 }
 
 .user-details{
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: outset;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 10px 30px 30px 30px;
+  text-align: center;
+  padding-top: 35px;
+  height: 250px;
+  overflow:hidden;
+}
+
+.addNewBooks{
+  border:1px outset;
+  background-color:white;
+  width: 100%;
+  display: block;
+}
+.addBooks{
   word-wrap: break-word;
   white-space: pre-wrap;
   word-break: break-word;

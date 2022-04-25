@@ -1,29 +1,29 @@
 import "../../Css/Dashboard.css"
 import React,{useState} from 'react'
-import { useLocation } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 // import * as ReactBootsrap from 'react-bootstrap'
 
-export default function LibrarianDashboard(){
+export default function LibrarianDashboard(props){
+    // const navigate = useNavigate();
+    const location = useLocation();
     const [isActive, setActive] = useState("false");
-    const location = useLocation();const [show, setShow] = React.useState(false);
+    const [show, setShow] = React.useState(false);
     const [show1, setShow1] = React.useState(false);
-    const [show2, setShow2] = React.useState(false);
     const [name , setName] = useState(''); const [editname , setEditname] =useState('');
     const [email , setEmail] = useState('');const [editemail, setEditemail]=useState('');
     const [contact ,setContact] = useState('');const [editcontact, setEditcontact]=useState('');
     const [role , setRole] = useState('')
 
-    var arr= location.state
-    // setName(location.state[0])
-    // window.alert(location.state)
     useEffect(()=>{
         const obj={
             email:location.state
         }
+        console.log("xsacscdscds: "+obj.email)
         axios.post('http://localhost:4000/getdata',obj)
         .then(response =>{
                 setName(response.data.name)
@@ -34,19 +34,8 @@ export default function LibrarianDashboard(){
         .catch(e=>{
             if(e)throw e;
         })
-    })
         
-
-
-    function hideme(){
-        var x = document.getElementById("user-info");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-
-    }
+    })
     
     function changeName(){
         setShow('true')   
@@ -85,10 +74,24 @@ export default function LibrarianDashboard(){
         window.location.href='/librariandashboard';
     }
 
+
+
+    function hideme(){
+        var x = document.getElementById("user-info");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function hidebookdiv(){
+
+    }
+
     function handleToggle(){
         setActive(!isActive);
-        // console.log("clicked "+isActive)
     }
+    
     return(
         <>
         <div>
@@ -102,14 +105,15 @@ export default function LibrarianDashboard(){
                     <ul className="list-unstyled components">
                         <p>Librarian Page</p>
                         <li className="active">
-                            <a href="#home"  >Home</a>
+                            < a>Home</a>
                         </li>
                         <li>
-                            <a href="#about">About</a>
+                        <Link to={`/addbook`} 
+                        state={email}>Books
+                        </Link>
                         </li>
-                
                         <li>
-                            <a href="#contact">Contact</a>
+                            <a href="#contact" >Contact</a>
                         </li>
                     </ul>
 
@@ -179,7 +183,19 @@ export default function LibrarianDashboard(){
                             </div>
                         </div>
                         <br /> <br />
-                        <div>fdsfsdfcdsdcdds</div>
+                        {/* book details */}
+
+                        <button className="btn btn-outline-success d-inline-block ml-auto" >
+                            <i className="fas fa-align-justify"></i>
+                            <a  >Hide-Show</a>
+                        </button>
+                        <div className="addNewBooks">
+                        
+                        <h3 className="heading">MyDetails</h3> 
+                            <div className="addBooks">
+                                </div>
+                        
+                        </div>
                         
 
                     </div>

@@ -13,6 +13,7 @@ import StudentDashboard from './components/Student/StudentDashboard';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import Signup from './components/Signup/signup';
 import Test from './components/test/test'
+import AddBook from './components/Librarian/AddBook';
 
 
 
@@ -33,6 +34,7 @@ function App() {
       <Route exact path='/signup' element={<Signup/>} />
       <Route exact path='/studentnavbar' element={<StudentNavbar title={"Student"}/>} />
       <Route exact path='/lib' element={<LibNavbar/>} />
+      <Route exact path='/addbook' element={<AddBook/>} />
     </Routes>
     
     </>
