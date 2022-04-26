@@ -9,7 +9,7 @@ app.use(express.json())
 
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/testo7",{useNewUrlParser:true})
-.then(() => console.log("connection successfull ...."))
+// .then(() => console.log("connection successfull ...."))
 .catch((err) => console.log(err));
 
 const Signup = require('../backend/schema/signup')
@@ -79,14 +79,6 @@ app.post("/librarian",async(req,res)=>{
 })
 
 
-app.get("/booklist", async(req,res )=>{
-    console.log("this is book list api");
-    var blist =await booklist.find({},{_id:0,__v:0,email:0})
-    res.json({book:blist})
-    
-})
-
-
 app.post("/student" , async(req,res)=>{
   const bookname = req.body.bookname;
   const author = req.body.author;
@@ -149,10 +141,23 @@ app.post('/updatecontact',async(req,res)=>{
 
 
 app.post('/registerbooks', (req,res)=>{
+  function generateID() {
+    const length = 8;
+    const charset =
+      "0123456789";
+    let random_bookId = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+      random_bookId += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return random_bookId;
+  }
+
   var obj = {
+    bookid:generateID(),
     bookname:req.body.bookname,
     author:req.body.author
   }
+  // console.log(obj)
   registerbooks.insertMany(obj)
   .catch(e=>{
     // res.json({msg:"something went wrong"})
@@ -163,6 +168,32 @@ app.post('/registerbooks', (req,res)=>{
   })
   res.json({msg:"Book added successfully"})
 })
+
+app.get("/booklist", async(req,res )=>{
+  // console.log("this is book list api");
+  var blist =await registerbooks.find({isblocked:false},{__v:0})
+  // console.log(blist)
+  // console.log(blist[0]._id)
+  res.json({book:blist})
+  
+})
+app.get('/removebooks/:bookid',async(req,res)=>{
+  // console.log(req.params)
+  const {bookid} = req.params
+  await registerbooks.updateOne({bookid},{$set:{isblocked:true}})
+  console.log('book removed')
+})
+
+app.post('/updatebooks', async(req,res)=>{
+  const bookid = req.body.bookid
+  const changebookname = req.body.changebookname
+  const changeauthor =req.body.changeauthor
+  // console.log(changeauthor)
+  await registerbooks.updateOne({bookid},{$set:{bookname:changebookname,author:changeauthor}})
+  
+  console.log("updated")
+})
+
 
 app.listen(port, ()=>{
     console.log(`listening to port no ${port}`);

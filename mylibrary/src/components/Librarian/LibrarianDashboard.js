@@ -24,6 +24,7 @@ export default function LibrarianDashboard(props){
     const [bookname , setBookname] = useState('');
     const [authorname , setAuthorname] = useState('');
     const [bookerrmsg , setBookerrmsg]=useState('');
+    // const [bookid , setbookid] = useState();
 
 
     useEffect(()=>{
@@ -121,6 +122,7 @@ export default function LibrarianDashboard(props){
             .then(resp =>{
                 setBookerrmsg(resp.data.msg)
             })
+
             setBookname('');
             setAuthorname('')
             // alert(bookerrmsg)
@@ -228,6 +230,7 @@ export default function LibrarianDashboard(props){
                         <div className="addNewBooks" id="addNewBooks">
                             <h3 className="heading">Add Book Here</h3> 
                             <div className="addBooks">
+
                                 <div className="form-group">
                                     <label htmlFor="form3Example4cg">Book Name</label>
                                     <input type="text" placeholder="Enter book name" className="form-control" value={bookname} onChange={(e)=>setBookname(e.target.value)} />
@@ -243,7 +246,7 @@ export default function LibrarianDashboard(props){
                                     {bookerrmsg}
                                 </div>
                             </div>
-                        
+                                        
                         </div>
                         
 

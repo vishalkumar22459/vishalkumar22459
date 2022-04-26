@@ -3,6 +3,10 @@ var mongoose = require('mongoose') ;
 
 var db = mongoose.Schema;
 var schema = new db ({
+   bookid : {
+      type : 'String' ,
+      require : 'true'
+   },
    bookname : {
       type : 'String' ,
       require : 'true'
@@ -10,6 +14,11 @@ var schema = new db ({
    author : {
       type : 'String' ,
       require : 'true'
+   },
+   isblocked: {
+      type:'Boolean',
+      require:'true',
+      default:false
    }
    
   
