@@ -7,18 +7,18 @@ app.use(cors())
 app.use(express.json())
 
 
-
-
-
-
-
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/testo7",{useNewUrlParser:true})
 .then(() => console.log("connection successfull ...."))
 .catch((err) => console.log(err));
 
-
 const Signup = require('../backend/schema/signup')
+const booklist = require('./schema/book');
+const registerbooks = require('../backend/schema/booksSchema')
+
+
+
+
 app.post('/signup', (req,res)=>{
     // const name = req.body;
       var obj =[
@@ -57,7 +57,7 @@ app.post("/signin",async(req,res)=> {
     
 });
 
-const booklist = require('./schema/book');
+
 const { response } = require("express");
 app.post("/librarian",async(req,res)=>{
       const email = req.body.email;
@@ -122,15 +122,20 @@ app.post("/Admin",async(req,res)=>{
 app.post('/getdata',async(req,res)=>{
   var email = req.body.email
   let user =await Signup.findOne({email})
+  .catch(e=>({
+    if (e) {
+     throw e; 
+    }
+  }))
   res.json({name:user.name,email:user.email,contact:user.contact, role : user.role  })
   // console.log(user.name)
 })
 
 app.post('/updatename',async(req,res)=>{
   var email = req.body.email
-  if(req.body.name !==''){
+  
     await Signup.findOneAndUpdate({email:email},{name:req.body.name})
-  }
+  
   
   console.log(email)
 })
@@ -140,6 +145,23 @@ app.post('/updatecontact',async(req,res)=>{
     await Signup.findOneAndUpdate({email:email},{contact:req.body.contact})
   }
   // console.log(email)
+})
+
+
+app.post('/registerbooks', (req,res)=>{
+  var obj = {
+    bookname:req.body.bookname,
+    author:req.body.author
+  }
+  registerbooks.insertMany(obj)
+  .catch(e=>{
+    // res.json({msg:"something went wrong"})
+    if(e)throw e;
+  })
+  .then(response => {
+    console.log("inserted")
+  })
+  res.json({msg:"Book added successfully"})
 })
 
 app.listen(port, ()=>{

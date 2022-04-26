@@ -14,16 +14,23 @@ export default function LibrarianDashboard(props){
     const [isActive, setActive] = useState("false");
     const [show, setShow] = React.useState(false);
     const [show1, setShow1] = React.useState(false);
-    const [name , setName] = useState(''); const [editname , setEditname] =useState('');
-    const [email , setEmail] = useState('');const [editemail, setEditemail]=useState('');
-    const [contact ,setContact] = useState('');const [editcontact, setEditcontact]=useState('');
-    const [role , setRole] = useState('')
+    const [name , setName] = useState(''); 
+    const [editname , setEditname] =useState('');
+    const [email , setEmail] = useState('');
+    const [editemail, setEditemail]=useState('');
+    const [contact ,setContact] = useState('');
+    const [editcontact, setEditcontact]=useState('');
+    const [role , setRole] = useState('');
+    const [bookname , setBookname] = useState('');
+    const [authorname , setAuthorname] = useState('');
+    const [bookerrmsg , setBookerrmsg]=useState('');
+
 
     useEffect(()=>{
         const obj={
             email:location.state
         }
-        console.log("xsacscdscds: "+obj.email)
+        // console.log("xsacscdscds: "+obj.email)
         axios.post('http://localhost:4000/getdata',obj)
         .then(response =>{
                 setName(response.data.name)
@@ -33,7 +40,7 @@ export default function LibrarianDashboard(props){
         })
         .catch(e=>{
             if(e)throw e;
-        })
+        },[])
         
     })
     
@@ -41,20 +48,22 @@ export default function LibrarianDashboard(props){
         setShow('true')   
     }
     function updateName(){
-        const obj ={
-            email : email
-        }
-        obj.name=editname
-        console.log(editname)
         
-        axios.post('http://localhost:4000/updatename',obj)
-        .then(Response => {
-            // alert(Response)
-        })
-        .catch(e => {
-            if(e) throw e;
-        })
-        window.location.href='/librariandashboard';
+            const obj ={
+                email : email
+            }
+            obj.name=editname
+            console.log(editname)
+            
+            axios.post('http://localhost:4000/updatename',obj)
+            .then(Response => {
+                // alert(Response)
+            })
+            .catch(e => {
+                if(e) throw e;
+            })
+            window.location.href='/librariandashboard';
+        
     }
     function changeContact(){
         setShow1('true')   
@@ -84,12 +93,38 @@ export default function LibrarianDashboard(props){
             x.style.display = "none";
         }
     }
-    function hidebookdiv(){
-
+    function showhidebook(){
+        var y = document.getElementById("addNewBooks");
+        if (y.style.display === "none") {
+            y.style.display = "block";
+        } else {
+            y.style.display = "none";
+        }
     }
 
     function handleToggle(){
         setActive(!isActive);
+    }
+
+    function addbookFun(){
+        if(!bookname || !authorname){
+            alert("Enter both  value bookname and author name then add!")
+        }else{
+            const obj ={
+                bookname:bookname,
+                author:authorname
+            }
+            axios.post('http://localhost:4000/registerbooks',obj)
+            .catch(e=> {
+                if(e)throw e;
+            })
+            .then(resp =>{
+                setBookerrmsg(resp.data.msg)
+            })
+            setBookname('');
+            setAuthorname('')
+            // alert(bookerrmsg)
+        }
     }
     
     return(
@@ -148,7 +183,7 @@ export default function LibrarianDashboard(props){
                     <div className="personal-detail">
                         <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
                             <i className="fas fa-align-justify"></i>
-                            <a  >Hide-Show My Details</a>
+                            <a  >Show-Hide My Details</a>
                         </button>
                         
                         <div className='user-info' id="user-info">
@@ -185,15 +220,29 @@ export default function LibrarianDashboard(props){
                         <br /> <br />
                         {/* book details */}
 
-                        <button className="btn btn-outline-success d-inline-block ml-auto" >
+                        <button onClick={showhidebook} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation" >
                             <i className="fas fa-align-justify"></i>
-                            <a  >Hide-Show</a>
+                            <a>Show-Hide Add Books</a>
                         </button>
-                        <div className="addNewBooks">
-                        
-                        <h3 className="heading">MyDetails</h3> 
+
+                        <div className="addNewBooks" id="addNewBooks">
+                            <h3 className="heading">Add Book Here</h3> 
                             <div className="addBooks">
+                                <div className="form-group">
+                                    <label htmlFor="form3Example4cg">Book Name</label>
+                                    <input type="text" placeholder="Enter book name" className="form-control" value={bookname} onChange={(e)=>setBookname(e.target.value)} />
                                 </div>
+                                <div className="form-group">
+                                    <label htmlFor="form3Example4cg">Author</label>
+                                    <input type="text" placeholder="Enter author name" className="form-control" value={authorname} onChange={(e)=>setAuthorname(e.target.value)} />
+                                </div>
+                                <div className="form-group">
+                                    <button className="btn btn-outline-success" onClick={addbookFun}>Add</button>
+                                </div>
+                                <div>
+                                    {bookerrmsg}
+                                </div>
+                            </div>
                         
                         </div>
                         
