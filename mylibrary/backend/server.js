@@ -21,26 +21,37 @@ const registerbooks = require('../backend/schema/booksSchema')
 
 app.post('/signup', (req,res)=>{
     // const name = req.body;
-      var obj =[
-          {
-            "name": req.body.name,
-            "email": req.body.email,
-            "contact": req.body.contact,
-            "password": req.body.password,
-            "role": req.body.role
-            
-          }];
-      Signup.insertMany(obj,function(err,res){
-      if(err)throw err;
-      console.log("signed-up");
-      })
+    function generateID() {
+      const length = 8;
+      const charset =
+        "0123456789";
+      let random_studentid = "";
+      for (var i = 0, n = charset.length; i < length; ++i) {
+        random_studentid += charset.charAt(Math.floor(Math.random() * n));
+      }
+      return random_studentid;
+    }
+    var obj =[
+        {
+          "studentid":generateID(),
+          "name": req.body.name,
+          "email": req.body.email,
+          "contact": req.body.contact,
+          "password": req.body.password,
+          "role": req.body.role
+          
+        }];
+    Signup.insertMany(obj,function(err,res){
+    if(err)throw err;
+    console.log("signed-up");
+    })
   
 })
 
 app.post("/signin",async(req,res)=> {
       const email = req.body.email;
       const pass = req.body.password;
-      const user = await Signup.findOne({email , pass})
+      const user = await Signup.findOne({email , pass,isblocked:false})
 
       if(!user || user === ''){
         console.log("Email or Password not found in database")
@@ -191,6 +202,20 @@ app.post('/updatebooks', async(req,res)=>{
   console.log("updated")
 })
 
+
+app.get("/studentlist", async(req,res )=>{
+  // console.log("this is book list api");
+  var studentlist =await Signup.find({role:'Student'},{role:0,password:0,_id:0,__v:0})
+  console.log(studentlist)
+  res.json({students:studentlist})
+})
+
+app.get("/librarianlist", async(req,res )=>{
+  // console.log("this is book list api");
+  var librarianlist =await Signup.find({role:'Librarian'},{role:0,password:0,_id:0,__v:0})
+  console.log(librarianlist)
+  res.json({librarians:librarianlist})
+})
 
 app.listen(port, ()=>{
     console.log(`listening to port no ${port}`);

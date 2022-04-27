@@ -3,6 +3,10 @@ var mongoose = require('mongoose') ;
 
 var db = mongoose.Schema;
 var schema = new db ({
+   studentid : {
+      type : 'String' ,
+      require : 'true'
+   },
    name : {
       type : 'String' ,
       require : 'true'
@@ -23,6 +27,11 @@ var schema = new db ({
     type : 'String' ,
     require : 'true'
     },
+   isblocked: {
+      type:'Boolean',
+      require:'true',
+      default:false
+   }
 });
 
 var users = mongoose.model('UserDetail',schema);

@@ -1,30 +1,42 @@
 import "../../Css/Dashboard.css"
 import { useLocation } from "react-router-dom";
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom";
+import axios from "axios";
 // import Signup from '../Signup/signup'
 
 export default function AllLibrarians(){
     const [isActive, setActive] = useState("false");
     const [email , setEmail] = useState('');
     const location = useLocation();
-   
-    
-    
+    let [Userarr , setUserarr] = useState([]);
+
+     
+    useEffect(()=> {
+        setEmail(location.state)
+        axios.get("http://localhost:4000/librarianlist")
+        .then((response) => {
+            setUserarr(response.data.librarians);
+            // console.log(response.data.book)
+        })
+    },[])
 
     
+
+
+
         
 
 
+    function hideme(){
+        var x = document.getElementById("book-info");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
     
-    
-    
-
-
-
-
-
-
     function handleToggle(){
         setActive(!isActive);
     }
@@ -82,10 +94,49 @@ export default function AllLibrarians(){
                         </div>
                     </nav>
 
-                    <div>{location.state}</div>
-                    <div>
-                        
+                    {/* <div> All Librarians Here</div> */}
+                    <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
+                        <i className="fas fa-align-justify"></i>
+                        <a  >Show-Hide </a>
+                    </button>
+                    
+                    <div className="tablediv table-responsive" id="book-info">
+                        <h5 className="heading">Librarians Registered</h5>
+                        <table className="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th className="col-xs-1 text-center">Sr.no</th>
+                                <th className="col-xs-1 text-center">Librarian Id</th>
+                                <th className="col-xs-1 text-center">Librarian Name</th>
+                                <th className="col-xs-1 text-center">Email Address</th>
+                                <th className="col-xs-1 text-center">Contact No.</th>
+                                <th className="col-xs-1 text-center">remove</th>
+                                <th className="col-xs-1 text-center">update</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {Userarr.length !== 0 ? (
+                                Userarr.map((val, index) => {
+                                return (
+                                    <tr  key={index+1}>
+                                        <td className="col-xs-1 text-center">{index+1}</td>
+                                        <td className="col-xs-1 text-center">{val.studentid}</td>
+                                        <td className="col-xs-1 text-center" > {val.name}</td>
+                                        <td className="col-xs-1 text-center">{val.email}</td>
+                                        <td className="col-xs-1 text-center">{val.contact}</td>
+                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ></td>
+                                        <td className="col-xs-1 text-center" id="c" style={{color: "#445e11"}}></td>
+                                    </tr>
+                                );
+                                })
+                                ) : (
+                                    <p style={{ textAlign: "center" }}> No Tasks</p>
+                                )}
+                            </tbody>
+                        </table>
                     </div>
+
+                    {/* <div> All Librarians ends Here</div> */}
 
 
 
