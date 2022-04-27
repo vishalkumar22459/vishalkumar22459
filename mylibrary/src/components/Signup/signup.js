@@ -84,7 +84,7 @@ export default function Signup(){
                                 </div>
 
                                 <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="form3Example4cg">Your Contact</label>
+                                <label className="form-label" >Your Contact</label>
                                 <input type="text" id="form3Example3cg" className="form-control form-control-lg" value={Contact} onChange={(e)=> setContact(e.target.value)}/>
                                 </div>
 

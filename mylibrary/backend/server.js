@@ -205,17 +205,25 @@ app.post('/updatebooks', async(req,res)=>{
 
 app.get("/studentlist", async(req,res )=>{
   // console.log("this is book list api");
-  var studentlist =await Signup.find({role:'Student'},{role:0,password:0,_id:0,__v:0})
-  console.log(studentlist)
+  var studentlist =await Signup.find({role:'Student',isblocked:false},{role:0,password:0,_id:0,__v:0})
+  // console.log(studentlist)
   res.json({students:studentlist})
 })
 
 app.get("/librarianlist", async(req,res )=>{
   // console.log("this is book list api");
-  var librarianlist =await Signup.find({role:'Librarian'},{role:0,password:0,_id:0,__v:0})
+  var librarianlist =await Signup.find({role:'Librarian',isblocked:false},{role:0,password:0,_id:0,__v:0})
   console.log(librarianlist)
   res.json({librarians:librarianlist})
 })
+
+app.post("/removeusers",async(req,res)=>{
+  const studentid = req.body.studentid
+  console.log(studentid)
+  await Signup.updateOne({studentid:studentid},{$set:{isblocked:true}})
+  console.log('user removed')
+})
+
 
 app.listen(port, ()=>{
     console.log(`listening to port no ${port}`);

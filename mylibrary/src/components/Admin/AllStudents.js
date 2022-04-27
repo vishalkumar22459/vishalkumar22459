@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {BsFillArchiveFill} from 'react-icons/bs'
 // import Signup from '../Signup/signup'
 
 export default function AllStudents(){
@@ -38,7 +39,14 @@ export default function AllStudents(){
     }
     
     
-
+    function handleremoveStudent(studentid){
+        // alert(studentid)
+        const obj = {
+            studentid:studentid
+        }
+        axios.post('http://localhost:4000/removeusers',obj)
+        window.location.href='/allstudents';
+    }
 
 
 
@@ -54,7 +62,7 @@ export default function AllStudents(){
             <div className="wrapper">
                 {/* <!-- Sidebar  --> */}
                 <nav id="sidebar" style={isActive ? {} :{margin: "0 0 0-250px"}}>
-                    <div className="sidebar-header" >
+                    <div className="sidebar-header">
                         <h3>Welcome To Library </h3>
                     </div>
 
@@ -102,14 +110,14 @@ export default function AllStudents(){
                     </nav>
                     {/* all students */}
 
-                    <div> All Students Here</div>
+                    {/* <div> All Students Here</div> */}
                     <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
                         <i className="fas fa-align-justify"></i>
                         <a  >Show-Hide </a>
                     </button>
                     
                     <div className="tablediv table-responsive" id="book-info">
-                        <h5 className="heading">Students Registered</h5>
+                        <h5 className="heading">All Registered Students </h5>
                         <table className="table table-bordered">
                         <thead>
                             <tr>
@@ -119,7 +127,6 @@ export default function AllStudents(){
                                 <th className="col-xs-1 text-center">Email Address</th>
                                 <th className="col-xs-1 text-center">Contact No.</th>
                                 <th className="col-xs-1 text-center">remove</th>
-                                <th className="col-xs-1 text-center">update</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -132,8 +139,7 @@ export default function AllStudents(){
                                         <td className="col-xs-1 text-center" > {val.name}</td>
                                         <td className="col-xs-1 text-center">{val.email}</td>
                                         <td className="col-xs-1 text-center">{val.contact}</td>
-                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ></td>
-                                        <td className="col-xs-1 text-center" id="c" style={{color: "#445e11"}}></td>
+                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ><BsFillArchiveFill style={{cursor: "pointer"}} onClick={()=>{handleremoveStudent(val.studentid)}} /></td>
                                     </tr>
                                 );
                                 })

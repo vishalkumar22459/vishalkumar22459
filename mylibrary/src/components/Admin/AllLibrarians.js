@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {BsFillArchiveFill} from 'react-icons/bs'
 // import Signup from '../Signup/signup'
 
 export default function AllLibrarians(){
@@ -25,7 +26,13 @@ export default function AllLibrarians(){
 
 
 
-        
+    function handleremoveLibrarian(studentid){
+        const obj = {
+            studentid:studentid,
+        }
+        axios.post('http://localhost:4000/removeusers',obj)
+        window.location.href='/alllibrarians';
+    }
 
 
     function hideme(){
@@ -101,7 +108,7 @@ export default function AllLibrarians(){
                     </button>
                     
                     <div className="tablediv table-responsive" id="book-info">
-                        <h5 className="heading">Librarians Registered</h5>
+                        <h5 className="heading">All Registered Librarians </h5>
                         <table className="table table-bordered">
                         <thead>
                             <tr>
@@ -111,7 +118,6 @@ export default function AllLibrarians(){
                                 <th className="col-xs-1 text-center">Email Address</th>
                                 <th className="col-xs-1 text-center">Contact No.</th>
                                 <th className="col-xs-1 text-center">remove</th>
-                                <th className="col-xs-1 text-center">update</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -124,13 +130,13 @@ export default function AllLibrarians(){
                                         <td className="col-xs-1 text-center" > {val.name}</td>
                                         <td className="col-xs-1 text-center">{val.email}</td>
                                         <td className="col-xs-1 text-center">{val.contact}</td>
-                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ></td>
-                                        <td className="col-xs-1 text-center" id="c" style={{color: "#445e11"}}></td>
+                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} >
+                                            <BsFillArchiveFill style={{cursor: "pointer"}} onClick={()=>{handleremoveLibrarian(val.studentid)}} /></td>
                                     </tr>
                                 );
                                 })
                                 ) : (
-                                    <p style={{ textAlign: "center" }}> No Tasks</p>
+                                    <p style={{ textAlign: "center" }}> No Users</p>
                                 )}
                             </tbody>
                         </table>
