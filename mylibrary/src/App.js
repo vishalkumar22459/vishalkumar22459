@@ -7,13 +7,16 @@ import Student from './components/Student/student'
 import Librarian from './components/Librarian';
 import Admin from './components/Admin/admin';
 import StudentNavbar from './components/Student/StudentNavbar'
-import LibNavbar from './components/Librarian/libNavbar';
+import Books from './components/Student/books';
 import LibrarianDashboard from './components/Librarian/LibrarianDashboard';
 import StudentDashboard from './components/Student/StudentDashboard';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import Signup from './components/Signup/signup';
 import Test from './components/test/test'
 import AddBook from './components/Librarian/AddBook';
+import AdminRegister from './components/Admin/AdminRegister';
+import AllStudents from './components/Admin/AllStudents';
+import AllLibrarians from './components/Admin/AllLibrarians';
 
 
 
@@ -33,8 +36,11 @@ function App() {
       <Route exact path='/test' element={<Test/>} />
       <Route exact path='/signup' element={<Signup/>} />
       <Route exact path='/studentnavbar' element={<StudentNavbar title={"Student"}/>} />
-      <Route exact path='/lib' element={<LibNavbar/>} />
       <Route exact path='/addbook' element={<AddBook/>} />
+      <Route exact path='/books' element={<Books/>} />
+      <Route exact path='/adminregister' element={<AdminRegister/>} />
+      <Route exact path='/allstudents' element={<AllStudents/>} />
+      <Route exact path='/alllibrarians' element={<AllLibrarians/>} />
     </Routes>
     
     </>

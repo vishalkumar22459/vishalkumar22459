@@ -125,10 +125,7 @@ app.post('/getdata',async(req,res)=>{
 
 app.post('/updatename',async(req,res)=>{
   var email = req.body.email
-  
-    await Signup.findOneAndUpdate({email:email},{name:req.body.name})
-  
-  
+  await Signup.findOneAndUpdate({email:email},{name:req.body.name})
   console.log(email)
 })
 app.post('/updatecontact',async(req,res)=>{

@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function StudentDashboard(){
     const [isActive, setActive] = useState("false");
@@ -84,6 +85,11 @@ export default function StudentDashboard(){
     }
 
 
+
+
+
+
+
     function handleToggle(){
         setActive(!isActive);
     }
@@ -103,22 +109,15 @@ export default function StudentDashboard(){
                             <a href="#home"  >Home</a>
                         </li>
                         <li>
-                            <a href="#about">About</a>
+                            <Link to={`/books`} 
+                            state={email}>Books
+                            </Link>
                         </li>
                 
                         <li>
                             <a href="#contact">Contact</a>
                         </li>
                     </ul>
-
-                    {/* <ul className="list-unstyled CTAs">
-                        <li>
-                            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" className="download">Download source</a>
-                        </li>
-                        <li>
-                            <a href="https://bootstrapious.com/p/bootstrap-sidebar" className="article">Back to article</a>
-                        </li>
-                    </ul> */}
                 </nav>
 
                 {/* <!-- Page Content  --> */}
@@ -142,7 +141,7 @@ export default function StudentDashboard(){
                     <div className="personal-detail">
                         <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
                             <i className="fas fa-align-justify"></i>
-                            <a  >Hide-Show My Details</a>
+                            <a  >Hide-Show</a>
                         </button>
                         
                         <div className='user-info' id="user-info">
@@ -176,8 +175,34 @@ export default function StudentDashboard(){
                                 
                             </div>
                         </div>
+                        {/* end of Showing details of user */}
+
                         <br /> <br />
-                        <div>fdsfsdfcdsdcdds</div>
+                        <div>{email}</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        
                     </div>
 
 

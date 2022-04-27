@@ -1,21 +1,23 @@
 import "../../Css/Dashboard.css"
-import React,{useState , useEffect} from 'react'
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import React,{useState , useEffect} from 'react'
 import axios from "axios";
-import {BsFillPenFill , BsFillArchiveFill} from 'react-icons/bs'
-// import { useEffect } from "react";
+import { BsFillArchiveFill} from 'react-icons/bs'
+import {FaCartArrowDown} from 'react-icons/fa'
 
-export default function LibrarianDashboard(){
-    const [email , setEmail]=useState('');
-    const [updatebook , setUpdatebook] = useState('');
-    const [updateauthor ,setUpdateauthor] = useState('');
+
+
+
+
+export default function Books(){
     const [isActive, setActive] = useState("false");
-    const [msg, setmsg] = useState('');
     const location = useLocation();
+    const [email , setEmail]=useState('');
+    const [msg, setmsg] = useState('');
     let [arr , setArr] = useState([]);
     const [bookid , setBookid] = useState();
-    // let bookid1='';
+    
     
      
     useEffect(()=> {
@@ -23,7 +25,6 @@ export default function LibrarianDashboard(){
         axios.get("http://localhost:4000/booklist")
         .then((response) => {
             setArr(response.data.book);
-            // console.log(response.data.book)
         })
     },[])
 
@@ -32,47 +33,11 @@ export default function LibrarianDashboard(){
         // console.log("clicked "+isActive)
     }
 
-    function handleremovebook(bookid){
-        // alert(bookid)
-        axios.get(`http://localhost:4000/removebooks/${bookid}`)
-        .then((response) => {
-            
-        })
-        window.location.href='/addbook';
+    function handleBorrowBook(bookid){
+        alert('borrow me')
     }
-    function handleupdatebook(bookid){
-        setBookid(bookid)
-        let x1 = document.getElementById("updatebook-box")
-        if(x1.style.display === 'none'){
-            x1.style.display = "block"
-        }else{
-            x1.style.display = "none"
-        }
-
-        // alert('im clicked'+bookid)
-    }
-    function updatebookFun(){
-        console.log(bookid)
-        if(updatebook == '' || updateauthor ==''){
-           return alert('fill both entries')
-        }
-        setmsg("Your Book is updated successfull")
-        const obj = {
-            bookid:bookid,
-            changebookname:updatebook,
-            changeauthor:updateauthor
-        }
-        axios.post('http://localhost:4000/updatebooks',obj)
-        .then((response) => {
-            
-        })
-        document.getElementById("updatebook-box").style.display = "none"
-        setTimeout(function(){
-            window.location.href='/addbook'
-        },3000)
-        
-        // console.log(obj)
-    }
+    
+    
     function hideme(){
         var x = document.getElementById("book-info");
         if (x.style.display === "none") {
@@ -82,6 +47,15 @@ export default function LibrarianDashboard(){
         }
     }
 
+
+    
+    
+
+
+
+    function handleToggle(){
+        setActive(!isActive);
+    }
     return(
         <>
         <div>
@@ -93,28 +67,20 @@ export default function LibrarianDashboard(){
                     </div>
 
                     <ul className="list-unstyled components">
-                        <p>Librarian Page</p>
+                        <p>StudentPage</p>
                         <li >
-                        <Link to={`/librariandashboard`} 
-                        state={location.state}>Home
-                        </Link>
+                            <Link to={`/studentdashboard`} 
+                            state={location.state}>Home
+                            </Link>
                         </li>
                         <li className="active">
-                            <a>Book</a>
+                            <a href="#about">Books</a>
                         </li>
+                
                         <li>
                             <a href="#contact">Contact</a>
                         </li>
                     </ul>
-
-                    {/* <ul className="list-unstyled CTAs">
-                        <li>
-                            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" className="download">Download source</a>
-                        </li>
-                        <li>
-                            <a href="https://bootstrapious.com/p/bootstrap-sidebar" className="article">Back to article</a>
-                        </li>
-                    </ul> */}
                 </nav>
 
                 {/* <!-- Page Content  --> */}
@@ -134,11 +100,10 @@ export default function LibrarianDashboard(){
                         </div>
                     </nav>
 
-
-
-
-
-                    {/* <div>{email}</div> */}
+                    {/* Showing details of user */}
+                    
+                    <div>{email}</div>
+                    
                     {/* book details are here */}
                     <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
                         <i className="fas fa-align-justify"></i>
@@ -153,8 +118,7 @@ export default function LibrarianDashboard(){
                                 <th className="col-xs-1 text-center">Sr.no</th>
                                 <th className="col-xs-1 text-center">BookName</th>
                                 <th className="col-xs-1 text-center">Author</th>
-                                <th className="col-xs-1 text-center">remove</th>
-                                <th className="col-xs-1 text-center">update</th>
+                                <th className="col-xs-1 text-center">Borrow</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -165,8 +129,7 @@ export default function LibrarianDashboard(){
                                         <td className="col-xs-1 text-center">{index+1}</td>
                                         <td className="col-xs-1 text-center" > {val.bookname}</td>
                                         <td className="col-xs-1 text-center">{val.author}</td>
-                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ><BsFillArchiveFill style={{cursor: "pointer"}} onClick={()=>{handleremovebook(val.bookid)}} /></td>
-                                        <td className="col-xs-1 text-center" id="c" style={{color: "#445e11"}}><BsFillPenFill style={{cursor: "pointer"}} onClick={()=>{handleupdatebook(val.bookid)}} /></td>
+                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ><FaCartArrowDown style={{cursor: "pointer"}} onClick={()=>{handleBorrowBook(val.bookid)}} /></td>
                                     </tr>
                                 );
                                 })
@@ -181,22 +144,6 @@ export default function LibrarianDashboard(){
                                     {msg}
                     </div>
 
-                                    <br />
-                    {/* update book is here */}
-                    <div className="udate-book-box responsive" id="updatebook-box"  style={{display:'none'}}>
-                        <h5 className="heading">Update Here</h5>
-                        <div className="form-group">
-                            <label htmlFor="form3Example1ab">Book Name</label>
-                            <input type="text" placeholder="Enter book name" className="form-control" value={updatebook} onChange={(e)=>setUpdatebook(e.target.value)} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="form3Example2ab">Author</label>
-                            <input type="text" placeholder="Enter author" className="form-control" value={updateauthor} onChange={(e)=>setUpdateauthor(e.target.value)} />
-                        </div>
-                        <div className="form-group">
-                            <button className="btn btn-outline-success" onClick={updatebookFun}>Update</button>
-                        </div>
-                    </div>
 
 
 
@@ -219,11 +166,23 @@ export default function LibrarianDashboard(){
 
 
 
+                    {/* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+                    <div className="line"></div>
 
+                    <h2>Lorem Ipsum Dolor</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+                    <div className="line"></div>
 
+                    <h2>Lorem Ipsum Dolor</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+                    <div className="line"></div>
+
+                    <h3>Lorem Ipsum Dolor</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
                 </div>
             </div>
         </div>

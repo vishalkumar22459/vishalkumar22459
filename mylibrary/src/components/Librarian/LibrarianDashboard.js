@@ -145,23 +145,14 @@ export default function LibrarianDashboard(props){
                             < a>Home</a>
                         </li>
                         <li>
-                        <Link to={`/addbook`} 
-                        state={email}>Books
-                        </Link>
+                            <Link to={`/addbook`} 
+                            state={email}>Books
+                            </Link>
                         </li>
                         <li>
                             <a href="#contact" >Contact</a>
                         </li>
                     </ul>
-
-                    {/* <ul className="list-unstyled CTAs">
-                        <li>
-                            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" className="download">Download source</a>
-                        </li>
-                        <li>
-                            <a href="https://bootstrapious.com/p/bootstrap-sidebar" className="article">Back to article</a>
-                        </li>
-                    </ul> */}
                 </nav>
 
                 {/* <!-- Page Content  --> */}

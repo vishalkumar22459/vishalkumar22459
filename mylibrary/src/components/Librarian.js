@@ -6,7 +6,7 @@ import { useLocation} from 'react-router-dom';
 import React ,{useState}from 'react'
 import TodoForm from './TodoForm'
 import Todo from './Todo'
-import LibNavbar from './Librarian/libNavbar';
+// import LibNavbar from './Librarian/libNavbar';
 
 export default function Librarian(){
 
@@ -43,7 +43,7 @@ export default function Librarian(){
 
     return(
         <>
-            <LibNavbar/>
+            {/* <LibNavbar/> */}
             <div className='row'>
                 <div className='librarian-dashboard'>
                     <div className='librarian-detail'>
