@@ -3,7 +3,7 @@ var mongoose = require('mongoose') ;
 
 var db = mongoose.Schema;
 var schema = new db ({
-   email : {
+   bookid : {
       type : 'String' ,
       require : 'true'
    },
@@ -14,11 +14,22 @@ var schema = new db ({
    author : {
       type : 'String' ,
       require : 'true'
-   }
+   },
+   date: {
+    type:'String',
+    required:'true',
+    default:Date()
+    },
+   isblocked: {
+      type:'Boolean',
+      require:'true',
+      default:false
+   },
+   
    
   
 });
 
-var booklist = mongoose.model('booklist',schema);
+var booklist = mongoose.model('Borrowedbook',schema);
 module.exports = booklist;
 

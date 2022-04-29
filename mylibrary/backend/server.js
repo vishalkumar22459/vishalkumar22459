@@ -13,8 +13,8 @@ mongoose.connect("mongodb://localhost:27017/testo7",{useNewUrlParser:true})
 .catch((err) => console.log(err));
 
 const Signup = require('../backend/schema/signup')
-const booklist = require('./schema/book');
 const registerbooks = require('../backend/schema/booksSchema')
+const Borrowedbook = require('../backend/schema/borrowBook')
 
 
 
@@ -68,43 +68,6 @@ app.post("/signin",async(req,res)=> {
     
 });
 
-
-const { response } = require("express");
-app.post("/librarian",async(req,res)=>{
-      const email = req.body.email;
-      const bookname = req.body.bookname;
-      const author = req.body.author;
-      // console.log("data added "+email+bookname+author)   
-      var obj =[
-        {
-          "email": email,
-          "bookname":bookname,
-          "author":author,
-          
-        }];
-        booklist.insertMany(obj,function(err,res){
-          if(err)throw err;
-          // console.log("inserted");
-          // console.log(obj);
-        })
-})
-
-
-app.post("/student" , async(req,res)=>{
-  const bookname = req.body.bookname;
-  const author = req.body.author;
-  const data = await booklist.findOneAndDelete({bookname,author},{_id:0 ,__v:0})
-  if(data){
-    
-    const msg= "You have successfully borrowed a book"
-    res.json({msg:msg , bookname:bookname , author:author})
-  }else{
-    const msg= "Book not found in booklist! borrow some other book"
-    res.json({msg:msg , bookname:'' , author: ''})
-    // console.log("false")
-  }
-  
-})
 
 app.post("/Admin",async(req,res)=>{
   const user = req.body.email;
@@ -231,6 +194,18 @@ app.post('/update-users-data',async(req,res)=>{
   const contact = req.body.contact
   await Signup.updateOne({studentid:studentid,isblocked:false},{$set:{name:name , email:email,contact:contact}})
   console("user updated")
+})
+
+app.post("/borrowbooks" , (req,res)=>{
+  const obj = {
+    bookid:req.body.bookid,
+    bookname:req.body.bookname,
+    author:req.body.author
+  }
+  Borrowedbook.insertMany(obj)
+  .then(resp=>{
+    res.json({borrowmsg:"successfully borrowed"})
+  })
 })
 
 app.listen(port, ()=>{

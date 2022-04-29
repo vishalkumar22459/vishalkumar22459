@@ -33,8 +33,17 @@ export default function Books(){
         // console.log("clicked "+isActive)
     }
 
-    function handleBorrowBook(bookid){
-        alert('borrow me')
+    function handleBorrowBook(bookid,bookname,author){
+        const obj ={
+            bookid:bookid,
+            bookname:bookname,
+            author:author
+        }
+        axios.post("http://localhost:4000/borrowbooks",obj)
+        .then(response=>{
+            alert(response.data.borrowmsg)
+        })
+        
     }
     
     
@@ -129,7 +138,7 @@ export default function Books(){
                                         <td className="col-xs-1 text-center">{index+1}</td>
                                         <td className="col-xs-1 text-center" > {val.bookname}</td>
                                         <td className="col-xs-1 text-center">{val.author}</td>
-                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ><FaCartArrowDown style={{cursor: "pointer"}} onClick={()=>{handleBorrowBook(val.bookid)}} /></td>
+                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ><FaCartArrowDown style={{cursor: "pointer"}} onClick={()=>{handleBorrowBook(val.bookid,val.bookname,val.author)}} /></td>
                                     </tr>
                                 );
                                 })
