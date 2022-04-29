@@ -106,7 +106,7 @@ export default function StudentDashboard(){
                     <ul className="list-unstyled components">
                         <p>StudentPage</p>
                         <li className="active">
-                            <a href="#home"  >Home</a>
+                            <a>Home</a>
                         </li>
                         <li>
                             <Link to={`/books`} 
@@ -115,7 +115,7 @@ export default function StudentDashboard(){
                         </li>
                 
                         <li>
-                            <a href="#contact">Contact</a>
+                            <a>Contact</a>
                         </li>
                     </ul>
                 </nav>

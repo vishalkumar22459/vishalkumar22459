@@ -32,6 +32,7 @@ export default function AllStudents(){
     
         
     function handleupdateUser(studentid , name,email,contact){
+        // document.getElementById("user-info").style.display='none'
         var x = document.getElementById("updatebook-user-box");
         if (x.style.display === "none") {
             x.style.display = "block";
@@ -60,7 +61,7 @@ export default function AllStudents(){
     }
 
     function hideme(){
-        var x = document.getElementById("book-info");
+        var x = document.getElementById("user-info");
         if (x.style.display === "none") {
             x.style.display = "block";
         } else {
@@ -146,7 +147,7 @@ export default function AllStudents(){
                         <a  >Show-Hide </a>
                     </button>
                     
-                    <div className="tablediv table-responsive" id="book-info">
+                    <div className="tablediv table-responsive" id="user-info">
                         <h5 className="heading">All Registered Students </h5>
                         <table className="table table-bordered">
                         <thead>

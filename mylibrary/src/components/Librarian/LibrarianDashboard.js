@@ -150,7 +150,7 @@ export default function LibrarianDashboard(props){
                             </Link>
                         </li>
                         <li>
-                            <a href="#contact" >Contact</a>
+                            <a >Contact</a>
                         </li>
                     </ul>
                 </nav>

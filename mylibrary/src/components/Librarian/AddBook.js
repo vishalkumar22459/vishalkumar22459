@@ -103,7 +103,7 @@ export default function LibrarianDashboard(){
                             <a>Book</a>
                         </li>
                         <li>
-                            <a href="#contact">Contact</a>
+                            <a>Contact</a>
                         </li>
                     </ul>
 
