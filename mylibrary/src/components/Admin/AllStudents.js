@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {BsFillArchiveFill} from 'react-icons/bs'
+import {BsFillArchiveFill,BsFillPenFill} from 'react-icons/bs'
 // import Signup from '../Signup/signup'
 
 export default function AllStudents(){
@@ -11,6 +11,10 @@ export default function AllStudents(){
     const [email , setEmail] = useState('');
     const location = useLocation();
     let [Userarr , setUserarr] = useState([]);
+    const [userId , setUserId] = useState('');
+    const [updateUserName , setUpdateUserName] = useState('');
+    const [updateUserEmail , setUpdateUserEmail] = useState('');
+    const [updateUserContact, setUpdateUserContact] = useState('');
 
     // const [bookid , setBookid] = useState();
     
@@ -27,7 +31,33 @@ export default function AllStudents(){
 
     
         
-
+    function handleupdateUser(studentid , name,email,contact){
+        var x = document.getElementById("updatebook-user-box");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+        setUserId(studentid)
+        setUpdateUserName(name)
+        setUpdateUserEmail(email)
+        setUpdateUserContact(contact)
+        // alert(studentid + " "+ name + " "+  email+ " "+ contact)
+    }
+    function updateUser(){
+        // if(!userId || !updateUserName || !updateUserEmail || !updateUserContact){
+        //     alert("fill details cor")
+        // }
+        const obj = {
+            studentid:userId,
+            name:updateUserName,
+            email:updateUserEmail,
+            contact:updateUserContact
+        }
+        // alert(" "+obj.studentid +" "+obj.name+" "+obj.email+" "+obj.contact)
+        axios.post('http://localhost:4000/update-users-data',obj)
+        window.location.href='/allstudents';
+    }
 
     function hideme(){
         var x = document.getElementById("book-info");
@@ -127,6 +157,7 @@ export default function AllStudents(){
                                 <th className="col-xs-1 text-center">Email Address</th>
                                 <th className="col-xs-1 text-center">Contact No.</th>
                                 <th className="col-xs-1 text-center">remove</th>
+                                <th className="col-xs-1 text-center">update</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -139,19 +170,47 @@ export default function AllStudents(){
                                         <td className="col-xs-1 text-center" > {val.name}</td>
                                         <td className="col-xs-1 text-center">{val.email}</td>
                                         <td className="col-xs-1 text-center">{val.contact}</td>
-                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} ><BsFillArchiveFill style={{cursor: "pointer"}} onClick={()=>{handleremoveStudent(val.studentid)}} /></td>
+                                        <td className="col-xs-1 text-center" style={{color: "#8b1919"}} >
+                                            <BsFillArchiveFill 
+                                            style={{cursor: "pointer"}} 
+                                            onClick={()=>{handleremoveStudent(val.studentid)}} />
+                                        </td>
+                                        <td className="col-xs-1 text-center" id="c" style={{color: "#445e11"}}>
+                                            <BsFillPenFill 
+                                            style={{cursor: "pointer"}} 
+                                            onClick={()=>{handleupdateUser(val.studentid , val.name,val.email,val.contact)}} />
+                                        </td>
+                                        
                                     </tr>
                                 );
+                                        
                                 })
                                 ) : (
-                                    <p style={{ textAlign: "center" }}> No Tasks</p>
+                                    <p style={{ textAlign: "center" }}> No Users</p>
                                 )}
                             </tbody>
                         </table>
                     </div>
-
+                    <br />
                     {/* all students ends here*/}
-
+                    <div className="udate-user-box responsive" id="updatebook-user-box"  style={{display:'none'}}>
+                        <h5 className="heading">Update Here</h5>
+                        <div className="form-group responsive">
+                            <label >Librarians Name</label>
+                            <input type="text" value={updateUserName} onChange={(e)=>setUpdateUserName(e.target.value)} className="form-control" />
+                        </div>
+                        <div className="form-group responsive">
+                            <label >Email Address</label>
+                            <input type="text" value={updateUserEmail} onChange={(e)=>setUpdateUserEmail(e.target.value)} className="form-control"  />
+                        </div>
+                        <div className="form-group responsive">
+                            <label>Contact no.</label>
+                            <input type="text"  value={updateUserContact} onChange={(e)=>setUpdateUserContact(e.target.value)} className="form-control"  />
+                        </div>
+                        <div className="form-group">
+                            <button className="btn btn-outline-success" onClick={updateUser} >Update</button>
+                        </div>
+                    </div>
 
 
 

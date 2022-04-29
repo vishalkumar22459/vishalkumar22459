@@ -220,10 +220,18 @@ app.get("/librarianlist", async(req,res )=>{
 app.post("/removeusers",async(req,res)=>{
   const studentid = req.body.studentid
   console.log(studentid)
-  await Signup.updateOne({studentid:studentid},{$set:{isblocked:true}})
+  await Signup.updateOne({studentid:studentid,isblocked:false},{$set:{isblocked:true}})
   console.log('user removed')
 })
 
+app.post('/update-users-data',async(req,res)=>{
+  const studentid = req.body.studentid
+  const name = req.body.name
+  const email = req.body.email
+  const contact = req.body.contact
+  await Signup.updateOne({studentid:studentid,isblocked:false},{$set:{name:name , email:email,contact:contact}})
+  console("user updated")
+})
 
 app.listen(port, ()=>{
     console.log(`listening to port no ${port}`);

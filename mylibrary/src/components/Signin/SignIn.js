@@ -8,18 +8,15 @@ import {useNavigate} from 'react-router-dom'
 
 
  export default function SignIn(){
-
     const [emailError, setEmailError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const Navigate = useNavigate();
-    
-    let name ='';
     let role  = '';
-    let contact ='';
-    let address = '';
     let msg = '';
+
+    
     
     
   const validateEmail = (e) => {
@@ -44,14 +41,8 @@ import {useNavigate} from 'react-router-dom'
         {
         axios.post('http://localhost:4000/signin',formdata)
             .then(Response =>{
-                // console.log(Response.data)
                 msg = Response.data.msg;
                 role = Response.data.role;
-                name = Response.data.name;
-                contact = Response.data.contact;
-                // password = Response.data.password;
-                
-
                 if(msg){
                     console.log(msg)
                 }
@@ -62,8 +53,6 @@ import {useNavigate} from 'react-router-dom'
                     Navigate('/studentdashboard',{state:email});
                 }else if(role === 'Admin'){
                     Navigate('/admindashboard',{state:email});
-                    // Navigate('/Admin',{state:[name,email,role,contact,address]});
-                    // window.location.href='/Admin'
                 }else{
                     window.alert(msg)
                 }
@@ -85,7 +74,7 @@ import {useNavigate} from 'react-router-dom'
             <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-6 col-md-6 col-lg-6 col-xl-5">
                 <div className="card shadow-2-strong">
-                    <div className="card-body p-3 text-center">
+                    <div className="card-body p-5 text-center">
 
                         <h3 className="mb-1">Sign in</h3>
 

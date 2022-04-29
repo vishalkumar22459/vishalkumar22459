@@ -14,12 +14,10 @@ export default function AdminDashboard(){
     const [name , setName] = useState(''); 
     const [editname , setEditname] =useState('');
     const [email , setEmail] = useState('');
-    const [contact ,setContact] = useState('');const [editcontact, setEditcontact]=useState('');
+    const [contact ,setContact] = useState('');
+    const [editcontact, setEditcontact]=useState('');
     const [role , setRole] = useState('')
 
-    var arr= location.state
-    // setName(location.state[0])
-    // window.alert(location.state)
     useEffect(()=>{
         const obj={
             email:location.state
@@ -34,6 +32,7 @@ export default function AdminDashboard(){
         .catch(e=>{
             if(e)throw e;
         })
+
     })
         
 
@@ -107,7 +106,7 @@ export default function AdminDashboard(){
                     <ul className="list-unstyled components">
                         <p>Admin Page</p>
                         <li className="active">
-                            <a href="#home"  >Home</a>
+                            <a >Home</a>
                         </li>
                         <li>
                             <Link to={`/adminregister`} 
@@ -120,7 +119,9 @@ export default function AdminDashboard(){
                             </Link>
                         </li>
                         <li>
-                            <a> Librarians</a>
+                        <Link to={`/alllibrarians`} 
+                            state={email}>Librarians
+                            </Link>
                         </li>
                         <li>
                             <a> Contact</a>
