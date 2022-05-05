@@ -10,19 +10,6 @@ export default function AdminRegister(){
     const location = useLocation();
    
     
-    
-
-    
-        
-
-
-    
-    
-    
-
-
-
-
 
 
     function handleToggle(){
@@ -82,9 +69,9 @@ export default function AdminRegister(){
                         </div>
                     </nav>
 
-                    <div>{location.state}</div>
-                    <div>
-                        
+                    {/* <div>{location.state}</div> */}
+                    <div className="tablediv responsive">
+                        <Signup />
                     </div>
 
 

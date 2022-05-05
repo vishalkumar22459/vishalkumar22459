@@ -1,10 +1,14 @@
 const express = require("express");
+const jwt = require('jsonwebtoken');
+var cookieParser = require('cookie-parser')
 const app = express();
 const port = 4000;
+const secretKey = 'mynameiskumaraniketfromlucknow';
 
 var cors = require('cors')
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser());
 
 
 const mongoose = require("mongoose");
@@ -15,6 +19,19 @@ mongoose.connect("mongodb://localhost:27017/testo7",{useNewUrlParser:true})
 const Signup = require('../backend/schema/signup')
 const registerbooks = require('../backend/schema/booksSchema')
 const Borrowedbook = require('../backend/schema/borrowBook')
+
+
+
+
+
+//for production
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("../build"));
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+}
 
 
 
@@ -48,6 +65,7 @@ app.post('/signup', (req,res)=>{
   
 })
 
+
 app.post("/signin",async(req,res)=> {
       const email = req.body.email;
       const pass = req.body.password;
@@ -55,13 +73,29 @@ app.post("/signin",async(req,res)=> {
 
       if(!user || user === ''){
         console.log("Email or Password not found in database")
-        res.json({succes : false , msg : "Email or Password not found in database"})
+        res.json({ msg : "Email or Password not found in database"})
       }else{
         const name = user.name;
         const role = user.role;
         const contact = user.contact;
-        const password = user.address;
+        const password = user.password;
         console.log("user "+email+" successfully logged-in as "+role);
+
+        jwt.sign({ user }, secretKey, (err, token) => {
+          
+          if (err) {
+            return res.json({
+              msg: "Something went Wrong,Please Try Again",
+            });
+          }else{
+            res.cookie("myToken", token, {
+              expiresIn: "1min",
+              httpOnly: true,
+            });
+          }
+        });
+
+        // console.log(token);
         res.json({name:name , role : role, contact:contact , password:password })
         
       }      
@@ -207,6 +241,9 @@ app.post("/borrowbooks" , (req,res)=>{
     res.json({borrowmsg:"successfully borrowed"})
   })
 })
+
+
+
 
 app.listen(port, ()=>{
     console.log(`listening to port no ${port}`);

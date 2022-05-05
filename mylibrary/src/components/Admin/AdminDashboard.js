@@ -139,7 +139,7 @@ export default function AdminDashboard(){
                                 <span>Toggle Sidebar</span>
                             </button>
                             <button className="btn btn-dark "  type="button" >
-                                <i class="fas fa-align-justify"></i>
+                                <i className="fas fa-align-justify"></i>
                                 <a href="/" >LogOut</a>
                             </button>
                 
