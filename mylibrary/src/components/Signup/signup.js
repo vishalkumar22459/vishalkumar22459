@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 export default function Signup(){
     const regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regContact = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/
     const [Name ,setName] = useState('')
     const [Email ,setEmail] = useState('')
     const [Role ,setRole] = useState('')
@@ -13,12 +14,15 @@ export default function Signup(){
     const [Contact ,setContact] = useState('')
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [contactError, setContactError] = useState('');
 
     
 
     const handleSubmit =(e)=>{
         e.preventDefault();
-        
+        if(!regContact.test(Contact)){
+            return setContactError("Add a valid contact no")
+        }
         if (!regEmail.test(Email)) {
             setEmailError('Enter valid Email!');
         } else {
@@ -72,21 +76,27 @@ export default function Signup(){
                                 <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="form3Example3cg" >Your Email</label>
                                 <input type="email" id="form3Example2cg" className="form-control form-control-lg" value={Email} onChange={(e)=>setEmail(e.target.value)} />
+                                <span style={{
+                                    // border:'outset',
+                                    color: 'red',
+                                    fontSize:15,
+                                    }}>{emailError}
+                                </span>
                                 </div>
                                 
-                                <div >
-                                    <span style={{
-                                        // border:'outset',
-                                        color: 'red',
-                                        fontSize:15,
-                                        }}>{emailError}
-                                    </span>
-                                </div>
+        
 
                                 <div className="form-outline mb-4">
                                 <label className="form-label" >Your Contact</label>
                                 <input type="text" id="form3Example3cg" className="form-control form-control-lg" value={Contact} onChange={(e)=> setContact(e.target.value)}/>
+                                    <span style={{
+                                        // border:'outset',
+                                        color: 'red',
+                                        fontSize:15,
+                                        }}>{contactError}
+                                    </span>
                                 </div>
+                                
 
                                 <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="form3Example4cg">Password</label>
@@ -96,16 +106,15 @@ export default function Signup(){
                                 <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="form3Example4cdg">Confirm password</label>
                                 <input type="password" id="form3Example6cdg" value={PasswordTwo} onChange={(e) => setPasswordTwo(e.target.value)}  className="form-control form-control-lg" />
+                                <span style={{
+                                    // border:'outset',
+                                    color: 'red',
+                                    fontSize:15,
+                                    }}>{passwordError}
+                                </span>
                                 </div>
 
-                                <div >
-                                    <span style={{
-                                        // border:'outset',
-                                        color: 'red',
-                                        fontSize:15,
-                                        }}>{passwordError}
-                                    </span>
-                                </div>
+                
 
                                 <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="form3Example4cg">Your Role</label>

@@ -8,6 +8,7 @@ import '../../Css/adminregister.css'
 
 export default function AdminRegister(){
     const regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regContact = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/
     const [isActive, setActive] = useState("false");
     const [email , setEmail] = useState('');
     const location = useLocation();
@@ -21,6 +22,7 @@ export default function AdminRegister(){
     const[addrole , setAddrole] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [contactError, setContactError] = useState('');
     
     
    
@@ -37,7 +39,9 @@ export default function AdminRegister(){
 
     const registeruser =(e)=>{
         e.preventDefault();
-        
+        if(!regContact.test(addcontact)){
+            return setContactError("Add a valid contact no")
+        }
         if (!regEmail.test(addemail)) {
            return setEmailError('Enter valid Email!');
         } else {
@@ -48,6 +52,8 @@ export default function AdminRegister(){
                 setPasswordError('');
             }
         }
+        
+       
         if(!addname || !addemail || !addcontact || !addpassword1 || !addpassword2 || !addrole){
             window.alert("Fill every details!");
         }else{
@@ -67,7 +73,9 @@ export default function AdminRegister(){
                 console.log(error)
             })
         }
-        alert("user registered successfully")
+        document.forms["myform"].reset();
+        alert("user registered successfully");
+        
     }
 
     function logout(){
@@ -136,12 +144,15 @@ export default function AdminRegister(){
                     {/* <div>{location.state}</div> */}
                     <div className="registerdivadmin responsive col-md col-md-offset-4" >
                         {/* <Signup /> */}
-                        <form style={{margin: "20px 20px 0 20px"}} >
+                        <h3 className="heading" >Register a user</h3>
+                        <form  id="myform" style={{margin: "20px 20px 0 20px"}} >
                             <div class="row" style={{margin: "20px 20px 0 20px"}}>
                                 <div class="col">
-                                <input type="text"  class="form-control" placeholder="Name" value={addname} onChange={(e)=> setAddname(e.target.value)} />
+                                <label className="label" >Full Name</label>
+                                <input type="text" class="form-control" placeholder="Name" value={addname} onChange={(e)=> setAddname(e.target.value)} />
                                 </div>
                                 <div class="col">
+                                <label className="label" >Email</label>
                                 <input type="email" class="form-control" placeholder="Email" value={addemail} onChange={(e)=> setAddemail(e.target.value)}/>
                                 <div >
                                     <span style={{
@@ -156,14 +167,25 @@ export default function AdminRegister(){
                             </div>
                             <div class="row" style={{margin: "20px 20px 0 20px"}}>
                                 <div class="col">
-                                <input type="text" class="form-control" placeholder="Contact" value={addcontact} onChange={(e)=> setAddcontact(e.target.value)} />
+                                <label className="label" >Contact</label>
+                                <input  class="form-control" placeholder="Contact" value={addcontact} onChange={(e)=> setAddcontact(e.target.value)} />
+                                <div >
+                                    <span style={{
+                                        // border:'outset',
+                                        color: 'red',
+                                        fontSize:15,
+                                        }}>{contactError}
+                                    </span>
+                                </div>
                                 </div>
                                 <div class="col">
+                                <label className="label" >Password</label>
                                 <input type="password" class="form-control" placeholder="Password" value={addpassword1} onChange={(e)=> setAddpassord1(e.target.value)}/>
                                 </div>
                             </div>
                             <div class="row" style={{margin: "20px 20px 0 20px"}}>
                                 <div class="col">
+                                <label className="label" >Confirm Password</label>
                                 <input type="password" class="form-control" placeholder="Confirm Password" value={addpassword2} onChange={(e)=> setAddpassword2(e.target.value)}/>
                                 <div >
                                     <span style={{
@@ -175,6 +197,7 @@ export default function AdminRegister(){
                                 </div>
                                 </div>
                                 <div class="col">
+                                    <label className="label" >Select Role</label>
                                     <select type="text" id="form3Example4cg" className="form-control" value={addrole} onChange={(e)=> setAddrole(e.target.value)}>
                                         <option>Select</option>
                                         <option >Admin</option>
