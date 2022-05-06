@@ -16,8 +16,16 @@ export default function AllLibrarians(){
     const location = useLocation();
     let [Userarr , setUserarr] = useState([]);
 
+    const [is_render,setIsRender]=useState(false)
+
      
     useEffect(()=> {
+        const token =window.localStorage.getItem('accessToken');
+        if(!token){
+            window.location.href='/';
+        }else{
+            setIsRender(true);
+        }
         setEmail(location.state)
         axios.get("http://localhost:4000/librarianlist")
         .then((response) => {
@@ -27,6 +35,10 @@ export default function AllLibrarians(){
         // document.getElementById("username").value=email
     },[])
 
+    function logout(){
+        window. localStorage.clear('accessToken');
+        window.location.href='/';
+       }
     
     function handleupdateUser(studentid , name,email,contact){
         var x = document.getElementById("updatebook-user-box");
@@ -81,6 +93,7 @@ export default function AllLibrarians(){
     return(
         // style={{margin: "0 0 0-250px"}}
         <>
+        {is_render?(
         <div>
             <div className="wrapper">
                 {/* <!-- Sidebar  --> */}
@@ -126,7 +139,7 @@ export default function AllLibrarians(){
                             </button>
                             <button className="btn btn-dark "  type="button" >
                                 <i class="fas fa-align-justify"></i>
-                                <a href="/" >LogOut</a>
+                                <a onClick={logout} >LogOut</a>
                             </button>
                 
                         </div>
@@ -247,6 +260,7 @@ export default function AllLibrarians(){
                 </div>
             </div>
         </div>
+        ):(<p></p>)}
         </>
     );
 }

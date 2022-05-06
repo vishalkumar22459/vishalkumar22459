@@ -15,10 +15,17 @@ export default function LibrarianDashboard(){
     const location = useLocation();
     let [arr , setArr] = useState([]);
     const [bookid , setBookid] = useState();
+    const [is_render,setIsRender]=useState(false)
     // let bookid1='';
     
      
     useEffect(()=> {
+        const token =window.localStorage.getItem('accessToken');
+        if(!token){
+            window.location.href='/';
+        }else{
+            setIsRender(true);
+        }
         setEmail(location.state)
         axios.get("http://localhost:4000/booklist")
         .then((response) => {
@@ -26,6 +33,11 @@ export default function LibrarianDashboard(){
             // console.log(response.data.book)
         })
     },[])
+
+    function logout(){
+        window. localStorage.clear('accessToken');
+        window.location.href='/';
+    }
 
     function handleToggle(){
         setActive(!isActive);
@@ -84,6 +96,7 @@ export default function LibrarianDashboard(){
 
     return(
         <>
+        {is_render?(
         <div>
             <div className="wrapper">
                 {/* <!-- Sidebar  --> */}
@@ -128,7 +141,7 @@ export default function LibrarianDashboard(){
                             </button>
                             <button className="btn btn-dark "  type="button" >
                                 <i className="fas fa-align-justify"></i>
-                                <a href="/" >LogOut</a>
+                                <a onClick={logout} >LogOut</a>
                             </button>
                 
                         </div>
@@ -227,6 +240,7 @@ export default function LibrarianDashboard(){
                 </div>
             </div>
         </div>
+        ):(<p></p>)}
         </>
     );
 }

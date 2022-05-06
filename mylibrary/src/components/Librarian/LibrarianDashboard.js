@@ -24,10 +24,17 @@ export default function LibrarianDashboard(props){
     const [bookname , setBookname] = useState('');
     const [authorname , setAuthorname] = useState('');
     const [bookerrmsg , setBookerrmsg]=useState('');
+    const [is_render,setIsRender]=useState(false)
     // const [bookid , setbookid] = useState();
 
 
     useEffect(()=>{
+        const token =window.localStorage.getItem('accessToken');
+        if(!token){
+            window.location.href='/';
+        }else{
+            setIsRender(true);
+        }
         const obj={
             email:location.state
         }
@@ -44,6 +51,11 @@ export default function LibrarianDashboard(props){
         },[])
         
     })
+
+    function logout(){
+        window. localStorage.clear('accessToken');
+        window.location.href='/';
+    }
     
     function changeName(){
         setShow('true')   
@@ -131,6 +143,7 @@ export default function LibrarianDashboard(props){
     
     return(
         <>
+        {is_render?(
         <div>
             <div className="wrapper">
                 {/* <!-- Sidebar  --> */}
@@ -166,7 +179,7 @@ export default function LibrarianDashboard(props){
                             </button>
                             <button className="btn btn-dark "  type="button" >
                                 <i className="fas fa-align-justify"></i>
-                                <a href="/" >LogOut</a>
+                                <a onClick={logout} >LogOut</a>
                             </button>
                 
                         </div>
@@ -289,6 +302,7 @@ export default function LibrarianDashboard(props){
                 </div>
             </div>
         </div>
+        ):(<p></p>)}
         </>
     );
 }

@@ -5,6 +5,7 @@ import React,{useState , useEffect} from 'react'
 import axios from "axios";
 import { BsFillArchiveFill} from 'react-icons/bs'
 import {FaCartArrowDown} from 'react-icons/fa'
+import Home from '../Home'
 
 
 
@@ -17,16 +18,28 @@ export default function Books(){
     const [msg, setmsg] = useState('');
     let [arr , setArr] = useState([]);
     const [bookid , setBookid] = useState();
+    const [is_render,setIsRender]=useState(false)
     
     
      
     useEffect(()=> {
+        const token =window.localStorage.getItem('accessToken');
+        if(!token){
+            window.location.href='/';
+        }else{
+            setIsRender(true);
+        }
         setEmail(location.state)
         axios.get("http://localhost:4000/booklist")
         .then((response) => {
             setArr(response.data.book);
         })
     },[])
+
+    function logout(){
+        window. localStorage.clear('accessToken');
+        window.location.href='/';
+    }
 
     function handleToggle(){
         setActive(!isActive);
@@ -67,6 +80,7 @@ export default function Books(){
     }
     return(
         <>
+        {is_render?(
         <div>
             <div className="wrapper">
                 {/* <!-- Sidebar  --> */}
@@ -103,7 +117,7 @@ export default function Books(){
                             </button>
                             <button className="btn btn-dark "  type="button" >
                                 <i className="fas fa-align-justify"></i>
-                                <a href="/" >LogOut</a>
+                                <a onClick={logout} >LogOut</a>
                             </button>
                 
                         </div>
@@ -189,6 +203,7 @@ export default function Books(){
                 </div>
             </div>
         </div>
+        ):(<Home />)}
         </>
     );
 }

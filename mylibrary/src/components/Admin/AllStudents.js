@@ -15,12 +15,18 @@ export default function AllStudents(){
     const [updateUserName , setUpdateUserName] = useState('');
     const [updateUserEmail , setUpdateUserEmail] = useState('');
     const [updateUserContact, setUpdateUserContact] = useState('');
-
+    const [is_render,setIsRender]=useState(false)
     // const [bookid , setBookid] = useState();
     
     
      
     useEffect(()=> {
+        const token =window.localStorage.getItem('accessToken');
+        if(!token){
+            window.location.href='/';
+        }else{
+            setIsRender(true);
+        }
         setEmail(location.state)
         axios.get("http://localhost:4000/studentlist")
         .then((response) => {
@@ -69,6 +75,10 @@ export default function AllStudents(){
         }
     }
     
+    function logout(){
+        window. localStorage.clear('accessToken');
+        window.location.href='/';
+    }
     
     function handleremoveStudent(studentid){
         // alert(studentid)
@@ -89,6 +99,7 @@ export default function AllStudents(){
     return(
         // style={{margin: "0 0 0-250px"}}
         <>
+        {is_render?(
         <div>
             <div className="wrapper">
                 {/* <!-- Sidebar  --> */}
@@ -134,7 +145,7 @@ export default function AllStudents(){
                             </button>
                             <button className="btn btn-dark "  type="button" >
                                 <i class="fas fa-align-justify"></i>
-                                <a href="/" >LogOut</a>
+                                <a onClick={logout} >LogOut</a>
                             </button>
                 
                         </div>
@@ -257,6 +268,7 @@ export default function AllStudents(){
                 </div>
             </div>
         </div>
+        ):(<p></p>)}
         </>
     );
 }

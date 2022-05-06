@@ -1,6 +1,6 @@
 import "../../Css/Dashboard.css"
 import { useLocation } from "react-router-dom";
-import React,{useState} from 'react'
+import React,{useState ,useEffect} from 'react'
 import { Link } from "react-router-dom";
 import Signup from '../Signup/signup'
 
@@ -8,9 +8,23 @@ export default function AdminRegister(){
     const [isActive, setActive] = useState("false");
     const [email , setEmail] = useState('');
     const location = useLocation();
+    const [is_render,setIsRender]=useState(false)
    
     
+    useEffect(()=> {
+        const token =window.localStorage.getItem('accessToken');
+        if(!token){
+            window.location.href='/';
+        }else{
+            setIsRender(true);
+        }
+        setEmail(location.state)
+    },[])
 
+    function logout(){
+        window. localStorage.clear('accessToken');
+        window.location.href='/';
+    }
 
     function handleToggle(){
         setActive(!isActive);
@@ -18,6 +32,7 @@ export default function AdminRegister(){
     return(
         // style={{margin: "0 0 0-250px"}}
         <>
+        {is_render?(
         <div>
             <div className="wrapper">
                 {/* <!-- Sidebar  --> */}
@@ -63,7 +78,7 @@ export default function AdminRegister(){
                             </button>
                             <button className="btn btn-dark "  type="button" >
                                 <i class="fas fa-align-justify"></i>
-                                <a href="/" >LogOut</a>
+                                <a onClick={logout} >LogOut</a>
                             </button>
                 
                         </div>
@@ -121,6 +136,7 @@ export default function AdminRegister(){
                 </div>
             </div>
         </div>
+        ):(<p></p>)}
         </>
     );
 }

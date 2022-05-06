@@ -15,11 +15,18 @@ export default function StudentDashboard(){
     const [email , setEmail] = useState('');const [editemail, setEditemail]=useState('');
     const [contact ,setContact] = useState('');const [editcontact, setEditcontact]=useState('');
     const [role , setRole] = useState('')
+    const [is_render,setIsRender]=useState(false)
 
     var arr= location.state
     // setName(location.state[0])
     // window.alert(location.state)
     useEffect(()=>{
+        const token =window.localStorage.getItem('accessToken');
+        if(!token){
+            window.location.href='/';
+        }else{
+            setIsRender(true);
+        }
         const obj={
             email:location.state
         }
@@ -45,6 +52,10 @@ export default function StudentDashboard(){
             x.style.display = "none";
         }
 
+    }
+    function logout(){
+        window. localStorage.clear('accessToken');
+        window.location.href='/';
     }
     
     function changeName(){
@@ -95,6 +106,7 @@ export default function StudentDashboard(){
     }
     return(
         <>
+        {is_render?(
         <div>
             <div className="wrapper">
                 {/* <!-- Sidebar  --> */}
@@ -131,7 +143,7 @@ export default function StudentDashboard(){
                             </button>
                             <button className="btn btn-dark "  type="button" >
                                 <i className="fas fa-align-justify"></i>
-                                <a href="/" >LogOut</a>
+                                <a onClick={logout} >LogOut</a>
                             </button>
                 
                         </div>
@@ -247,6 +259,7 @@ export default function StudentDashboard(){
                 </div>
             </div>
         </div>
+        ):(<p></p>)}
         </>
     );
 }
