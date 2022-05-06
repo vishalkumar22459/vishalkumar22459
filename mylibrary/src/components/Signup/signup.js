@@ -109,12 +109,12 @@ export default function Signup(){
 
                                 <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="form3Example4cg">Your Role</label>
-                                <select type="text" id="form3Example4cg" className="form-control form-control-lg" value={Role} onChange={(e)=> setRole(e.target.value)}>
-                                    <option>Select</option>
-                                    <option >Admin</option>
-                                    <option>Student</option>
-                                    <option >Librarian</option>
-                                     </select>
+                                    <select type="text" id="form3Example4cg" className="form-control form-control-lg" value={Role} onChange={(e)=> setRole(e.target.value)}>
+                                        <option>Select</option>
+                                        {/* <option >Admin</option> */}
+                                        <option>Student</option>
+                                        <option >Librarian</option>
+                                    </select>
                                 </div>
 
                                 {/* <div className="form-check d-flex justify-content-center mb-5">
