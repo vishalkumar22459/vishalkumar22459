@@ -71,7 +71,7 @@ export default function AdminRegister(){
 
                     {/* <div>{location.state}</div> */}
                     <div className="tablediv responsive">
-                        <Signup />
+                        {/* <Signup /> */}
                     </div>
 
 

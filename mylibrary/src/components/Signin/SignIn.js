@@ -11,10 +11,12 @@ import {useNavigate} from 'react-router-dom'
     const [emailError, setEmailError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [token, setToken] = useState('');
 
     const Navigate = useNavigate();
     let role  = '';
     let msg = '';
+    
 
     
     
@@ -46,7 +48,9 @@ import {useNavigate} from 'react-router-dom'
                 if(msg){
                     console.log(msg)
                 }
-                
+
+                // console.log(Response.data.cookie)
+                window.localStorage.setItem('accessToken',Response.data.token);
                 if(role === 'Librarian'){
                     Navigate('/librariandashboard',{state:email});
                 }else if(role === 'Student'){

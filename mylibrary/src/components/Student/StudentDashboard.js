@@ -178,7 +178,7 @@ export default function StudentDashboard(){
                         {/* end of Showing details of user */}
 
                         <br /> <br />
-                        <div>{email}</div>
+                        {/* <div>{email}</div> */}
 
 
 

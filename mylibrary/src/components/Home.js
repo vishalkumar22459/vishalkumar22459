@@ -4,7 +4,7 @@ import Signin from './Signin/SignIn';
 
 
 
-export default function homePage(){
+export default function homePage(e){
     
     return(
         <>

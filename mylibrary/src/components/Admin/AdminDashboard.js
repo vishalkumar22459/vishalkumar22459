@@ -17,11 +17,24 @@ export default function AdminDashboard(){
     const [contact ,setContact] = useState('');
     const [editcontact, setEditcontact]=useState('');
     const [role , setRole] = useState('')
+    const [is_render,setIsRender]=useState(false)
+    // const [isRender , setIsrender] = useState(false)
 
+
+
+    
     useEffect(()=>{
+        const token =window.localStorage.getItem('accessToken');
+        if(!token){
+            window.location.href='/';
+        }else{
+            setIsRender(true);
+        }
+
         const obj={
             email:location.state
         }
+
         axios.post('http://localhost:4000/getdata',obj)
         .then(response =>{
                 setName(response.data.name)
@@ -33,9 +46,15 @@ export default function AdminDashboard(){
             if(e)throw e;
         })
 
+
+
     })
         
 
+   function logout(){
+    window. localStorage.clear('accessToken');
+    window.location.href='/';
+   }
 
     function hideme(){
         var x = document.getElementById("user-info");
@@ -95,102 +114,100 @@ export default function AdminDashboard(){
     return(
         // style={{margin: "0 0 0-250px"}}
         <>
-        <div>
-            <div className="wrapper">
-                {/* <!-- Sidebar  --> */}
-                <nav id="sidebar" style={isActive ? {} :{margin: "0 0 0-250px"}}>
-                    <div className="sidebar-header" >
-                        <h3>Welcome To Library </h3>
-                    </div>
+        {is_render?(
+           <div>
+           <div className="wrapper">
+               {/* <!-- Sidebar  --> */}
+               <nav id="sidebar" style={isActive ? {} :{margin: "0 0 0-250px"}}>
+                   <div className="sidebar-header" >
+                       <h3>Welcome To Library </h3>
+                   </div>
 
-                    <ul className="list-unstyled components">
-                        <p>Admin Page</p>
-                        <li className="active">
-                            <a >Home</a>
-                        </li>
-                        <li>
-                            <Link to={`/adminregister`} 
-                            state={email}>Register User
-                            </Link>
-                        </li>
-                        <li>
-                        <Link to={`/allstudents`} 
-                            state={email}>Students
-                            </Link>
-                        </li>
-                        <li>
-                        <Link to={`/alllibrarians`} 
-                            state={email}>Librarians
-                            </Link>
-                        </li>
-                        <li>
-                            <a> Contact</a>
-                        </li>
-                    </ul>
-                </nav>
+                   <ul className="list-unstyled components">
+                       <p>Admin Page</p>
+                       <li className="active">
+                           <a >Home</a>
+                       </li>
+                       <li>
+                           <Link to={`/adminregister`} 
+                           state={email}>Register User
+                           </Link>
+                       </li>
+                       <li>
+                       <Link to={`/allstudents`} 
+                           state={email}>Students
+                           </Link>
+                       </li>
+                       <li>
+                       <Link to={`/alllibrarians`} 
+                           state={email}>Librarians
+                           </Link>
+                       </li>
+                       <li>
+                           <a> Contact</a>
+                       </li>
+                   </ul>
+               </nav>
 
-                {/* <!-- Page Content  --> */}
-                <div id="content">
+               {/* <!-- Page Content  --> */}
+               <div id="content">
 
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <div className="container-fluid">
-                            <button type="button" id="sidebarCollapse" className="btn btn-info" onClick={handleToggle}>
-                                <i className="fas fa-align-left"></i>
-                                <span>Toggle Sidebar</span>
-                            </button>
-                            <button className="btn btn-dark "  type="button" >
-                                <i className="fas fa-align-justify"></i>
-                                <a href="/" >LogOut</a>
-                            </button>
-                
-                        </div>
-                    </nav>
+                   <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                       <div className="container-fluid">
+                           <button type="button" id="sidebarCollapse" className="btn btn-info" onClick={handleToggle}>
+                               <i className="fas fa-align-left"></i>
+                               <span>Toggle Sidebar</span>
+                           </button>
+                           <button className="btn btn-dark "  type="button" >
+                               <i className="fas fa-align-justify"></i>
+                               <a onClick={logout} >LogOut</a>
+                           </button>
+               
+                       </div>
+                   </nav>
 
-                    {/* Showing details of user */}
-                    <div className="personal-detail">
-                        <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
-                            <i className="fas fa-align-justify"></i>
-                            <a  >Hide-Show My Details</a>
-                        </button>
-                        
-                        <div className='user-info' id="user-info">
-                            <h3 className="heading">MyDetails</h3>
-                            <div className='user-details'>
-                                <div>
-                                    <p className="text-dark">Name : {name} <FaEdit onClick={changeName} /></p>
-                                    {show ? 
-                                    <div>
-                                        <input type="text" value={editname} onChange={e=> setEditname(e.target.value)}  />
-                                        <button onClick={updateName}>Update</button>
-                                    </div>
-                                    : null}
-                                </div>
-                                <div>
-                                    <p className="text-dark">Email : {email} </p>
-                                    
-                                </div>
-                                <div>
-                                    <p className="text-dark">Contact : {contact} <FaEdit onClick={changeContact} /> </p>
-                                    {show1 ? 
-                                    <div>
-                                        <input type="text" value={editcontact} onChange={e=> setEditcontact(e.target.value)}  />
-                                        <button onClick={updateContact}>Update</button>
-                                    </div>
-                                    : null}
-                                </div>
-                                <div>
-                                    <p className="text-dark">Role : {role}  </p>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        {/* Showing details of user ends here*/}
-                        <br /> <br />
-                        <div>{email}</div>
-                    </div>
-
-
-
+                   {/* Showing details of user */}
+                   <div className="personal-detail">
+                       <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
+                           <i className="fas fa-align-justify"></i>
+                           <a  >Hide-Show My Details</a>
+                       </button>
+                       
+                       <div className='user-info' id="user-info">
+                           <h3 className="heading">MyDetails</h3>
+                           <div className='user-details'>
+                               <div>
+                                   <p className="text-dark">Name : {name} <FaEdit onClick={changeName} /></p>
+                                   {show ? 
+                                   <div>
+                                       <input type="text" value={editname} onChange={e=> setEditname(e.target.value)}  />
+                                       <button onClick={updateName}>Update</button>
+                                   </div>
+                                   : null}
+                               </div>
+                               <div>
+                                   <p className="text-dark">Email : {email} </p>
+                                   
+                               </div>
+                               <div>
+                                   <p className="text-dark">Contact : {contact} <FaEdit onClick={changeContact} /> </p>
+                                   {show1 ? 
+                                   <div>
+                                       <input type="text" value={editcontact} onChange={e=> setEditcontact(e.target.value)}  />
+                                       <button onClick={updateContact}>Update</button>
+                                   </div>
+                                   : null}
+                               </div>
+                               <div>
+                                   <p className="text-dark">Role : {role}  </p>
+                               </div>
+                               
+                           </div>
+                       </div>
+                       {/* Showing details of user ends here*/}
+                       <br /> <br />
+                       {/* <div>{email}</div> */}
+                   </div>
 
 
 
@@ -216,26 +233,31 @@ export default function AdminDashboard(){
 
 
 
-                    {/* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                    <div className="line"></div>
 
-                    <h2>Lorem Ipsum Dolor</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                    <div className="line"></div>
+                   {/* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                    <h2>Lorem Ipsum Dolor</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                   <div className="line"></div>
 
-                    <div className="line"></div>
+                   <h2>Lorem Ipsum Dolor</h2>
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                    <h3>Lorem Ipsum Dolor</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
-                </div>
-            </div>
-        </div>
+                   <div className="line"></div>
+
+                   <h2>Lorem Ipsum Dolor</h2>
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                   <div className="line"></div>
+
+                   <h3>Lorem Ipsum Dolor</h3>
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
+               </div>
+           </div>
+       </div>
+        ):(<p></p>)}
+       
         </>
     );
 }

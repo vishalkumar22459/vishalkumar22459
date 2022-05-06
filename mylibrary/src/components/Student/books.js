@@ -111,7 +111,7 @@ export default function Books(){
 
                     {/* Showing details of user */}
                     
-                    <div>{email}</div>
+                    {/* <div>{email}</div> */}
                     
                     {/* book details are here */}
                     <button onClick={hideme} className="btn btn-outline-success d-inline-block ml-auto" id="show-detail" type="button" aria-expanded="false" aria-label="Toggle navigation">
